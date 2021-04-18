@@ -17,7 +17,7 @@ public abstract class LcArrayUtil {
      * @return int[]
      */
     public static int[] get1dArr(String arr) {
-        if ("[]".equals(arr)) {
+        if ("[]".equals(arr) || "".equals(arr)) {
             return new int[]{};
         }
         String str = arr.substring(1, arr.length() - 1);
@@ -36,7 +36,7 @@ public abstract class LcArrayUtil {
      * @return int[][]
      */
     public static int[][] get2dArr(String arr) {
-        if ("[[]]".equals(arr)) {
+        if ("[[]]".equals(arr) || "".equals(arr)) {
             return new int[][]{};
         }
         String str = arr.substring(1, arr.length() - 1);

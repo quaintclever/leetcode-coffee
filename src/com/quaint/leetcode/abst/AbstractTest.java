@@ -26,15 +26,9 @@ public abstract class AbstractTest {
     /**
      * 常用测试变量定义
      */
-    protected static int[] absArrNull = {};
-    protected static int[] absArr0 = {0};
-    protected static int[] absArr123 = {1, 2, 3};
-    protected static int[] absArr321 = {3, 2, 1};
-
-    protected static int[][] absArr2dNull = {{}};
-    protected static int[][] absArr2d_1_1 = {{1}};
-    protected static int[][] absArr2d_1_3 = {{1, 2, 3}};
-    protected static int[][] absArr2d_2_3 = {{1, 2, 3},{1, 2, 3}};
-    protected static int[][] absArr2d_3_3 = {{1, 2, 3},{1, 2, 3},{1, 2, 3}};
+    protected static int[] arr1d1 = {};
+    protected static int[] arr1d2 = {};
+    protected static int[][] arr2d1 = {{}};
+    protected static int[][] arr2d2 = {{}};
 
 }
