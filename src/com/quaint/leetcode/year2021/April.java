@@ -10,6 +10,7 @@ package com.quaint.leetcode.year2021;
  */
 public class April {
 
+
     /**
      * 寻找最长的公共子串
      *       s   2   s   2
@@ -23,7 +24,7 @@ public class April {
      * @param s2
      * @return
      */
-    public String longStr2(String s1, String s2) {
+    public String longCommonStr(String s1, String s2) {
         int n1 = s1.length(), n2 = s2.length();
         String[][] fn = new String[n1 + 1][n2 + 1];
         // 初始化动态规划边界

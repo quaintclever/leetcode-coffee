@@ -18,15 +18,15 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::longStr);
+        ps.add(AprilTest::longCommonStr);
     }
 
     /**
      * ===============================================================
      */
-    private static void longStr() {
+    private static void longCommonStr() {
         System.out.println("!!!测试开始执行!!!");
-        System.out.println(self.longStr2("s2s2","ss2s"));
+        System.out.println(self.longCommonStr("abdfeghi123x","bcdweghi12xjg"));
     }
 
     private static void compareVersion() {
