@@ -19,21 +19,18 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::template);
-        ps.add(AprilTest::getXORSum);
+        ps.add(AprilTest::compareVersion);
     }
 
     /**
      * ===============================================================
      */
-    private static void template() {
+    private static void compareVersion() {
         System.out.println("!!!测试开始执行!!!");
-        // 初始化数组变量
-        arr1d1 = get1dArr("");
-        arr1d2 = get1dArr("");
-        arr2d1 = get2dArr("");
-        arr2d2 = get2dArr("");
+        System.out.println(self.compareVersion("7.5.2.4","7.5.3"));
+        System.out.println(self.compareVersion("1.0","1"));
     }
+
 
     private static void getXORSum() {
         int[] arr1 = get1dArr("[1,2,3]");
