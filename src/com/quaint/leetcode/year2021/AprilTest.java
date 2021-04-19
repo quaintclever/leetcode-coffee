@@ -3,7 +3,6 @@ package com.quaint.leetcode.year2021;
 import com.quaint.leetcode.abst.AbstractTest;
 
 import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
-import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
 
 /**
  * <p>
@@ -19,12 +18,17 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::compareVersion);
+        ps.add(AprilTest::longStr);
     }
 
     /**
      * ===============================================================
      */
+    private static void longStr() {
+        System.out.println("!!!测试开始执行!!!");
+        System.out.println(self.longStr2("s2s2","ss2s"));
+    }
+
     private static void compareVersion() {
         System.out.println("!!!测试开始执行!!!");
         System.out.println(self.compareVersion("7.5.2.4","7.5.3"));

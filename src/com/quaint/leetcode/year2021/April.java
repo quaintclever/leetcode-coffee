@@ -1,7 +1,5 @@
 package com.quaint.leetcode.year2021;
 
-import javafx.util.Pair;
-
 /**
  * <p>
  * desc: 四月是你的谎言, leetcode 练习.
@@ -11,6 +9,63 @@ import javafx.util.Pair;
  * @since 18 April 2021
  */
 public class April {
+
+    /**
+     * 寻找最长的公共子串
+     *       s   2   s   2
+     *   "" ""  ""  ""  ""
+     * s ""  s  ""   s  ""
+     * s ""  s  ""   s  ""
+     * 2 ""  "" s2  ""   2
+     * s ""  s  ""  s2s ""
+     *
+     * @param s1
+     * @param s2
+     * @return
+     */
+    public String longStr2(String s1, String s2) {
+        int n1 = s1.length(), n2 = s2.length();
+        String[][] fn = new String[n1 + 1][n2 + 1];
+        // 初始化动态规划边界
+        for (int i = 0; i < n1; i++) {
+            fn[i][0] = "";
+        }
+        for (int i = 0; i < n2; i++) {
+            fn[0][i] = "";
+        }
+        String ans = "";
+        for (int i = 0; i < n1; i++) {
+            for (int j = 0; j < n2; j++) {
+                if (s1.charAt(i) == s2.charAt(j)) {
+                    fn[i + 1][j + 1] = fn[i][j] + s1.charAt(i);
+                    if (fn[i + 1][j + 1].length() > ans.length()) {
+                        ans = fn[i + 1][j + 1];
+                    }
+                } else {
+                    fn[i + 1][j + 1] = "";
+                }
+            }
+        }
+        return ans;
+    }
+
+    public String longStr(String s1, String s2) {
+        if (s1.length() < s2.length()) {
+            String temp = s1;
+            s1 = s2;
+            s2 = temp;
+        }
+        String ans = "";
+        for (int i = 0; i < s2.length(); i++) {
+            for (int j = i + 1; j <= s2.length(); j++) {
+                String sub2 = s2.substring(i, j);
+                if (s1.contains(sub2) && sub2.length() > ans.length()) {
+                    ans = sub2;
+                }
+            }
+        }
+        return ans;
+    }
 
     /**
      * 165. 比较版本号
