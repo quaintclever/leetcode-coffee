@@ -1,6 +1,7 @@
 # quaint ignore
 .idea
 out
+test/com/quaint/ignore
 
 
 # Compiled class file
