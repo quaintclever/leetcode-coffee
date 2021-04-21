@@ -66,6 +66,11 @@ public class Learn02 {
         boolean res = "bbb111".regionMatches(3, "aa111a", 2, 3);
         System.out.println("\n比较字符串局部相等: " + res);
 
+        // 寻找字符串存在的第一个下标
+        String source = "quaiaint";
+        String tar = "ain";
+        System.out.println(source.indexOf(tar));
+
         // 修改字符串中的指定字符
         String updateStr = "\n我是要成为海贼王的困特!quaint";
         StringBuilder sb = new StringBuilder(updateStr);
