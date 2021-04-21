@@ -18,12 +18,17 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::longCommonStr);
+        ps.add(AprilTest::numDecodings);
     }
 
     /**
      * ===============================================================
      */
+    private static void numDecodings() {
+        System.out.println("!!!测试开始执行!!!");
+        System.out.println(self.numDecodings("2101"));
+    }
+
     private static void longCommonStr() {
         System.out.println("!!!测试开始执行!!!");
         System.out.println(self.longCommonStr("abdfeghi123x","bcdweghi12xjg"));

@@ -10,11 +10,38 @@ package com.quaint.leetcode.year2021;
  */
 public class April {
 
+    /**
+     * 91. 解码方法
+     * 11106
+     * 当前解码 只和 当前位置, 或者前一位置有关.
+     *
+     * @param s
+     * @return
+     */
+    public int numDecodings(String s) {
+        s = " " + s;
+        char[] chars = s.toCharArray();
+        // 创建滚动数组
+        int[] fn = new int[]{1, 0, 0};
+        for (int i = 1; i < chars.length; i++) {
+            fn[i % 3] = 0;
+            int a = chars[i] - '0', b = (chars[i - 1] - '0') * 10 + a;
+            // a 符合要求, 可以从 i-1 转移过来
+            if (a > 0 && a < 10) {
+                fn[i % 3] = fn[(i - 1) % 3];
+            }
+            // b 符合要求, 可以从 i-2 转移过来
+            if (b > 9 && b < 27) {
+                fn[i % 3] += fn[(i - 2) % 3];
+            }
+        }
+        return fn[(chars.length - 1) % 3];
+    }
 
     /**
      * 寻找最长的公共子串
-     *       s   2   s   2
-     *   "" ""  ""  ""  ""
+     * s   2   s   2
+     * "" ""  ""  ""  ""
      * s ""  s  ""   s  ""
      * s ""  s  ""   s  ""
      * 2 ""  "" s2  ""   2
