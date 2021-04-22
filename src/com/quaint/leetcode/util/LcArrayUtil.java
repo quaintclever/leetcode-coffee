@@ -47,8 +47,13 @@ public abstract class LcArrayUtil {
         int[][] res = new int[m][n];
         for (int i = 0; i < m; i++) {
             String[] inArr = strArr[i].split(",");
+            int lower = 0;
             for (int j = 0; j < n; j++) {
-                res[i][j] = Integer.parseInt(inArr[j]);
+                if ("".equals(inArr[j])) {
+                    lower++;
+                    continue;
+                }
+                res[i][j - lower] = Integer.parseInt(inArr[j]);
             }
         }
         return res;

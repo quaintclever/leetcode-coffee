@@ -11,6 +11,48 @@ package com.quaint.leetcode.year2021;
 public class April {
 
     /**
+     * 363. 矩形区域不超过 K 的最大数值和
+     * matrix = [[1,0,1],[0,-2,3]], k = 2
+     * => 2
+     * matrix = [[2,2,-1]], k = 3
+     * 输出：3
+     *
+     * @param matrix
+     * @param k
+     * @return
+     */
+    public int maxSumSubmatrix(int[][] matrix, int k) {
+
+        // 初始化二维前缀数组
+        int m = matrix.length, n = matrix[0].length;
+        int[][] sum = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                sum[i][j] = sum[i][j - 1] + sum[i - 1][j] - sum[i - 1][j - 1] + matrix[i - 1][j - 1];
+            }
+        }
+
+        // 遍历前缀数组 [i,j] => [l,o] 范围的和
+        int ans = Integer.MIN_VALUE;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                for (int l = i; l <= m; l++) {
+                    for (int o = j; o <= n; o++) {
+                        int cur = sum[l][o] + sum[i - 1][j - 1] - sum[i - 1][o] - sum[l][j - 1];
+                        if (cur < k) {
+                            ans = Math.max(cur, ans);
+                        }
+                        if (cur == k) {
+                            return k;
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
      * 91. 解码方法
      * 11106
      * 当前解码 只和 当前位置, 或者前一位置有关.

@@ -1,8 +1,10 @@
 package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.abst.AbstractTest;
+import com.quaint.leetcode.util.LcPrintUtil;
 
 import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
+import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
 
 /**
  * <p>
@@ -18,12 +20,18 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::numDecodings);
+        ps.add(AprilTest::maxSumSubmatrix);
     }
 
     /**
      * ===============================================================
      */
+    private static void maxSumSubmatrix() {
+        System.out.println("!!!测试开始执行!!!");
+        LcPrintUtil.printCompare(2, self.maxSumSubmatrix(get2dArr("[[1,0,1],[0,-2,3]]"), 2));
+        LcPrintUtil.printCompare(3, self.maxSumSubmatrix(get2dArr("[[1,0,1],[0,-2,3]]"), 2));
+    }
+
     private static void numDecodings() {
         System.out.println("!!!测试开始执行!!!");
         System.out.println(self.numDecodings("2101"));
