@@ -27,9 +27,9 @@ public abstract class LcPrintUtil {
 
         // 判断答案是否错误
         if (outStr.equals(ansStr)) {
-            System.out.println("case: [" + idx + "] ==> your out: [" + outStr + "]  <==>  the ans: [" + ansStr + "].");
+            System.out.println("case: [" + idx + "] ==> your out: " + outStr + "  |  the ans: " + ansStr + ".");
         } else {
-            System.err.println("case: [" + idx + "] ==> your out: [" + outStr + "]  <==>  the ans: [" + ansStr + "].");
+            System.err.println("case: [" + idx + "] ==> your out: " + outStr + "  |  the ans: " + ansStr + ".");
         }
     }
 

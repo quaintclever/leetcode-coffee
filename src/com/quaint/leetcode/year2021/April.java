@@ -1,5 +1,9 @@
 package com.quaint.leetcode.year2021;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * <p>
  * desc: 四月是你的谎言, leetcode 练习.
@@ -9,6 +13,62 @@ package com.quaint.leetcode.year2021;
  * @since 18 April 2021
  */
 public class April {
+
+
+    /**
+     * 368. 最大整除子集
+     * 给你一个由 无重复 正整数组成的集合 nums ，请你找出并返回其中最大的整除子集 answer ，子集中每一元素对 (answer[i], answer[j]) 都应当满足：
+     * answer[i] % answer[j] == 0 ，或
+     * answer[j] % answer[i] == 0
+     * 如果存在多个有效解子集，返回其中任何一个均可。
+     * @param nums
+     * @return
+     */
+    public List<Integer> largestDivisibleSubset(int[] nums) {
+        // 排序
+        Arrays.sort(nums);
+
+        // 初始化 动态规划数组, 和状态转移数组
+        int n = nums.length;
+        int[] fn = new int[n];
+        int[] gn = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            int len = 1, pre = i;
+            for (int j = i - 1; j >= 0; j--) {
+                if (nums[i] % nums[j] == 0) {
+                    // 如果大于 len, 更新
+                    if (fn[j] + 1 > len) {
+                        fn[i] = fn[j] + 1;
+                        gn[i] = j;
+                        len = fn[j] + 1;
+                        pre = j;
+                    }
+                }
+            }
+            fn[i] = len;
+            gn[i] = pre;
+        }
+
+        // 寻找 最长的 fn.
+        int max = -1;
+        int idx = -1;
+        for (int i = 0; i < n; i++) {
+            if (fn[i] > max) {
+                max = fn[i];
+                idx = i;
+            }
+        }
+
+        // 构建转移过程
+        List<Integer> ans = new ArrayList<>();
+        while (ans.size() != max) {
+            ans.add(nums[idx]);
+            idx = gn[idx];
+        }
+        return ans;
+    }
+
 
     /**
      * 363. 矩形区域不超过 K 的最大数值和
