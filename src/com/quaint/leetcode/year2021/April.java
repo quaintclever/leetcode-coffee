@@ -62,8 +62,6 @@ public class April {
                 if (nums[i] % nums[j] == 0) {
                     // 如果大于 len, 更新
                     if (fn[j] + 1 > len) {
-                        fn[i] = fn[j] + 1;
-                        gn[i] = j;
                         len = fn[j] + 1;
                         pre = j;
                     }
