@@ -1,5 +1,7 @@
 package com.quaint.leetcode.year2021;
 
+import com.quaint.leetcode.util.LcDataStructure;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,16 +14,42 @@ import java.util.List;
  * @author quaint
  * @since 18 April 2021
  */
-public class April {
+public class April extends LcDataStructure {
+
+
+    /**
+     * 897. 递增顺序搜索树
+     */
+    TreeNode ans = new TreeNode();
+    TreeNode pre = new TreeNode();
+
+    public TreeNode increasingBST(TreeNode root) {
+        TreeNode head = ans;
+        dfs(root);
+        pre.right = null;
+        return head;
+    }
+
+    public void dfs(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        dfs(node.left);
+        ans.val = node.val;
+        ans.right = new TreeNode();
+        pre = ans;
+        ans = ans.right;
+        dfs(node.right);
+    }
 
 
     /**
      * 377. 组合总和 Ⅳ
      * 给你一个由 不同 整数组成的数组 nums ，和一个目标整数 target 。请你从 nums 中找出并返回总和为 target 的元素组合的个数。
-     *
+     * <p>
      * 题目数据保证答案符合 32 位整数范围。
      *
-     *  @param nums
+     * @param nums
      * @param target
      * @return
      */
@@ -44,6 +72,7 @@ public class April {
      * answer[i] % answer[j] == 0 ，或
      * answer[j] % answer[i] == 0
      * 如果存在多个有效解子集，返回其中任何一个均可。
+     *
      * @param nums
      * @return
      */
