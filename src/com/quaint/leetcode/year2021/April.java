@@ -16,6 +16,41 @@ import java.util.List;
  */
 public class April extends LcDataStructure {
 
+    /**
+     * 1011. 在 D 天内送达包裹的能力
+     * 暴力法
+     *
+     * @param weights
+     * @param D
+     * @return
+     */
+    public int shipWithinDays(int[] weights, int D) {
+
+        // 求最大值, 和总和
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i = 0; i < weights.length; i++) {
+            max = Math.max(weights[i], max);
+            sum += weights[i];
+        }
+
+        // 计算开始 的下标
+        int start = Math.max(max, sum / D);
+        int d = 0;
+        while(d <= 0) {
+            int s = start;
+            d = D;
+            for (int i = 0; i < weights.length; i++) {
+                if (s - weights[i] < 0) {
+                    s = start;
+                    d--;
+                }
+                s -= weights[i];
+            }
+            start ++;
+        }
+        return start - 1;
+    }
 
     /**
      * 897. 递增顺序搜索树

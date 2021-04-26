@@ -1,12 +1,12 @@
 package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.abst.AbstractTest;
-import com.quaint.leetcode.util.LcPrintUtil;
 
 import java.util.Arrays;
 
 import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
 import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
+import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
 
 /**
  * <p>
@@ -22,23 +22,30 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::largestDivisibleSubset);
+        ps.add(AprilTest::shipWithinDays);
     }
 
     /**
      * ===============================================================
      */
+    private static void shipWithinDays() {
+        System.out.println("!!!测试开始执行!!!");
+        int[] p = get1dArr("[1,2,3,4,5,6,7,8,9,10]");
+        printCompare(15, self.shipWithinDays(p, 5));
+        printCompare(160, self.shipWithinDays(get1dArr("[10,50,100,100,50,100,100,100]"), 5));
+    }
+
     private static void largestDivisibleSubset() {
         System.out.println("!!!测试开始执行!!!");
-        LcPrintUtil.printCompare(Arrays.asList(4, 8, 240), self.largestDivisibleSubset(get1dArr("[4,8,10,240]")));
-        LcPrintUtil.printCompare(Arrays.asList(1, 2), self.largestDivisibleSubset(get1dArr("[1,3,2]")));
-        LcPrintUtil.printCompare(Arrays.asList(1, 2, 4, 8), self.largestDivisibleSubset(get1dArr("[1,2,4,8]")));
+        printCompare(Arrays.asList(4, 8, 240), self.largestDivisibleSubset(get1dArr("[4,8,10,240]")));
+        printCompare(Arrays.asList(1, 2), self.largestDivisibleSubset(get1dArr("[1,3,2]")));
+        printCompare(Arrays.asList(1, 2, 4, 8), self.largestDivisibleSubset(get1dArr("[1,2,4,8]")));
     }
 
     private static void maxSumSubmatrix() {
         System.out.println("!!!测试开始执行!!!");
-        LcPrintUtil.printCompare(2, self.maxSumSubmatrix(get2dArr("[[1,0,1],[0,-2,3]]"), 2));
-        LcPrintUtil.printCompare(3, self.maxSumSubmatrix(get2dArr("[[1,0,1],[0,-2,3]]"), 2));
+        printCompare(2, self.maxSumSubmatrix(get2dArr("[[1,0,1],[0,-2,3]]"), 2));
+        printCompare(3, self.maxSumSubmatrix(get2dArr("[[1,0,1],[0,-2,3]]"), 2));
     }
 
     private static void numDecodings() {
