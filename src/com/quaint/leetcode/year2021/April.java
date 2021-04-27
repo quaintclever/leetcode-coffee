@@ -2,9 +2,7 @@ package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.util.LcDataStructure;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -15,6 +13,33 @@ import java.util.List;
  * @since 18 April 2021
  */
 public class April extends LcDataStructure {
+
+
+    /**
+     * 938. 二叉搜索树的范围和
+     * 给定二叉搜索树的根结点 root，返回值位于范围 [low, high] 之间的所有结点的值的和。
+     *
+     * @param root
+     * @param low
+     * @param high
+     * @return
+     */
+    public int rangeSumBST(TreeNode root, int low, int high) {
+        int ans = 0;
+        Deque<TreeNode> stk = new LinkedList<>();
+        while(root != null || !stk.isEmpty()) {
+            while (root != null) {
+                stk.push(root);
+                root = root.left;
+            }
+            root = stk.pop();
+            if (root.val >= low && root.val <= high) {
+                ans += root.val;
+            }
+            root = root.right;
+        }
+        return ans;
+    }
 
     /**
      * 1011. 在 D 天内送达包裹的能力
