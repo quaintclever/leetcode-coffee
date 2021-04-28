@@ -13,7 +13,7 @@ import com.quaint.leetcode.year2021.AprilTest;
  */
 public class QuaintMain {
 
-    private static AbstractTest april = new AprilTest();
+    private static final AbstractTest april = new AprilTest();
 
     public static void main(String[] args) {
         april.execute();
