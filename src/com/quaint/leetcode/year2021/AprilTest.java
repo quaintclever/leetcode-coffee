@@ -22,12 +22,18 @@ public class AprilTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(AprilTest::shipWithinDays);
+        ps.add(AprilTest::canCross);
     }
 
     /**
      * ===============================================================
      */
+    private static void canCross() {
+        System.out.println("!!!测试开始执行!!!");
+        printCompare(true, self.canCross(get1dArr("[0,1,3,5,6,8,12,17]")));
+        printCompare(false, self.canCross(get1dArr("[0,1,2,3,4,8,9,11]")));
+    }
+
     private static void shipWithinDays() {
         System.out.println("!!!测试开始执行!!!");
         int[] p = get1dArr("[1,2,3,4,5,6,7,8,9,10]");
