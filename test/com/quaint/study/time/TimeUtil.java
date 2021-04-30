@@ -3,6 +3,7 @@ package com.quaint.study.time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -36,6 +37,14 @@ public abstract class TimeUtil {
         } catch (Exception e) {
             throw new IllegalArgumentException("时间字符串不能转换成LocalTime!");
         }
+    }
+
+    /**
+     * 获取今天 0 时的 时间戳
+     * @return 时间戳
+     */
+    public static long getTodayZeroTime() {
+        return LocalDate.now().atStartOfDay().toEpochSecond(ZoneOffset.of("+8"));
     }
 
 }

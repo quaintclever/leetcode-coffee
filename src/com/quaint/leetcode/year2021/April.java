@@ -14,6 +14,43 @@ import java.util.*;
  */
 public class April extends LcDataStructure {
 
+
+    /**
+     * 137. 只出现一次的数字 II
+     * @param nums  3/1
+     * @return once
+     */
+    public int singleNumber(int[] nums) {
+        int one = 0, two = 0;
+        for (int num : nums) {
+            one = one ^ num & ~two;
+            two = two ^ num & ~one;
+        }
+        return one;
+    }
+
+    // 暴力
+    public int singleNumber1(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                if (map.get(num) == 2) {
+                    map.remove(num);
+                } else {
+                    map.put(num, 2);
+                }
+            } else {
+                map.put(num, 1);
+            }
+        }
+        int ans = 0;
+        for (Integer integer : map.keySet()) {
+            ans = integer;
+        }
+        return ans;
+    }
+
+
     Map<Integer, Integer> map = new HashMap<>();
     boolean cross = false;
     Map<String, Boolean> memory = new HashMap<>();
