@@ -18,6 +18,41 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+    /**
+     * 503. 下一个更大元素 II
+     * @param nums
+     * @return
+     */
+    public int[] nextGreaterElements(int[] nums) {
+        int find, n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        for (int i = 0; i < n; i++) {
+            find = (i + 1) % n;
+            while (find != i) {
+                if (nums[find] > nums[i]) {
+                    ans[i] = nums[find];
+                    break;
+                }
+                find = (find + 1) % n;
+            }
+        }
+        return ans;
+    }
+
+    public int[] nextGreaterElements2(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Arrays.fill(ans, -1);
+        Deque<Integer> stk = new LinkedList<>();
+        for (int i = 0; i < n * 2 - 1; i++) {
+            while (!stk.isEmpty() && nums[stk.peek()] < nums [i % n]) {
+                ans[stk.pop()] = nums[i % n];
+            }
+            stk.push(i % n);
+        }
+        return ans;
+    }
 
     /**
      * 303. 区域和检索 - 数组不可变

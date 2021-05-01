@@ -20,7 +20,12 @@ public abstract class LcArrayUtil {
         if ("[]".equals(arr) || "".equals(arr)) {
             return new int[]{};
         }
-        String str = arr.substring(1, arr.length() - 1);
+        String str;
+        if (arr.startsWith("[") && arr.endsWith("]")) {
+            str = arr.substring(1, arr.length() - 1);
+        } else {
+            str = arr;
+        }
         String[] strArr = str.split(",");
         int[] res = new int[strArr.length];
         for (int i = 0; i < strArr.length; i++) {
