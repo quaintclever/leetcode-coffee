@@ -19,7 +19,124 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 5733. 最近的房间
+     * 未通过...
+     */
+    public int[] closestRoom(int[][] rooms, int[][] queries) {
+        // 排序
+        Arrays.sort(rooms, (o1, o2) -> {
+            if (o1[1] == o2[1]) {
+                return o1[0] > o2[0] ? 1 : -1;
+            }
+            return o1[1] > o2[1] ? 1 : -1;
+        });
+
+        // 求最大面积
+        int maxSize = 0;
+        for (int i = 0; i < rooms.length; i++) {
+            maxSize = Math.max(rooms[i][1], maxSize);
+        }
+
+        int[] ans = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            int needSize = queries[i][1];
+            if (needSize > maxSize) {
+                ans[i] = -1;
+                continue;
+            }
+            // 2分 查找 合适的面积
+            int left = 0;
+            int right = rooms.length - 1;
+            int mid = right;
+            while (left < right) {
+                mid = left + right + 1 >> 1;
+                if (rooms[mid][1] > needSize) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+            // 2分 查找 合适的房间id;
+            int needId = queries[i][0];
+            left = Math.min(left, mid);
+            right = rooms.length - 1;
+            while (left < right) {
+                mid = left + right + 1 >> 1;
+                if (rooms[mid][0] > needId) {
+                    right = mid - 1;
+                } else {
+                    left = mid;
+                }
+            }
+            ans[i] = rooms[left][0] < rooms[right][0] ? rooms[left][0] : rooms[right][0];
+        }
+        return ans;
+    }
+
+
+    /**
+     * 减小和重新排列数组后的最大元素
+     */
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        Arrays.sort(arr);
+        arr[0] = 1;
+        for (int i = 1; i < arr.length; i++) {
+            if (Math.abs(arr[i] - arr[i - 1]) > 1) {
+                arr[i] = arr[i - 1] + 1;
+            }
+        }
+        return arr[arr.length - 1];
+    }
+
+
+    /**
+     * 座位预约管理系统
+     */
+    class SeatManager {
+
+        Queue<Integer> que = new PriorityQueue<>();
+        int num = 0;
+
+        public SeatManager(int n) {
+        }
+
+        public int reserve() {
+            if (que.isEmpty()) {
+                return ++num;
+            } else {
+                return que.poll();
+            }
+        }
+
+        public void unreserve(int seatNumber) {
+            if (seatNumber <= num) {
+                que.offer(seatNumber);
+            }
+        }
+    }
+
+
+    /**
+     * 将所有数字用字符替换
+     */
+    public String replaceDigits(String s) {
+        int n = s.length();
+        char[] sc = s.toCharArray();
+        StringBuilder ans = new StringBuilder();
+        for (int i = 0; i < sc.length; i++) {
+            if (i % 2 == 1) {
+                ans.append((char) (sc[i - 1] + sc[i] - '0'));
+            } else {
+                ans.append(sc[i]);
+            }
+        }
+        return ans.toString();
+    }
+
+
+    /**
      * 503. 下一个更大元素 II
+     *
      * @param nums
      * @return
      */
@@ -46,7 +163,7 @@ public class May extends LcDataStructure {
         Arrays.fill(ans, -1);
         Deque<Integer> stk = new LinkedList<>();
         for (int i = 0; i < n * 2 - 1; i++) {
-            while (!stk.isEmpty() && nums[stk.peek()] < nums [i % n]) {
+            while (!stk.isEmpty() && nums[stk.peek()] < nums[i % n]) {
                 ans[stk.pop()] = nums[i % n];
             }
             stk.push(i % n);
@@ -59,11 +176,12 @@ public class May extends LcDataStructure {
      */
     class NumArray {
         int[] sums;
+
         public NumArray(int[] nums) {
             int n = nums.length;
             sums = new int[n + 1];
-            for(int i = 0; i < n; i++) {
-                sums[i+1] = nums[i] + sums[i];
+            for (int i = 0; i < n; i++) {
+                sums[i + 1] = nums[i] + sums[i];
             }
         }
 
