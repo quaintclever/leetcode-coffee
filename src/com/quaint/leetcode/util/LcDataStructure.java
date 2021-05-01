@@ -1,5 +1,7 @@
 package com.quaint.leetcode.util;
 
+import java.util.List;
+
 /**
  * @author quaint
  * @date 2021/4/25
@@ -27,5 +29,14 @@ public abstract class LcDataStructure {
             this.right = right;
         }
     }
+
+    /**
+     * Definition for Employee.
+     */
+    public class Employee {
+        public int id;
+        public int importance;
+        public List<Integer> subordinates;
+    };
 
 }

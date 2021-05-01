@@ -1,7 +1,7 @@
 package com.quaint.leetcode;
 
 import com.quaint.leetcode.abst.AbstractTest;
-import com.quaint.leetcode.year2021.AprilTest;
+import com.quaint.leetcode.year2021.MayTest;
 
 /**
  * <p>
@@ -13,10 +13,10 @@ import com.quaint.leetcode.year2021.AprilTest;
  */
 public class QuaintMain {
 
-    private static final AbstractTest april = new AprilTest();
+    private static final AbstractTest test = new MayTest();
 
     public static void main(String[] args) {
-        april.execute();
+        test.execute();
     }
 
 }
