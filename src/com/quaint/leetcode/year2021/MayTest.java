@@ -3,7 +3,6 @@ package com.quaint.leetcode.year2021;
 import com.quaint.leetcode.abst.AbstractTest;
 
 import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
-import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
 
 /**
@@ -20,12 +19,21 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::closestRoom);
+        ps.add(MayTest::splitString);
     }
 
     /**
      * ===============================================================
      */
+    private static void splitString() {
+        System.out.println("!!!测试开始执行!!!");
+        printCompare(false, self.splitString("00000010000000000000"));
+        printCompare(false, self.splitString("1"));
+        printCompare(false, self.splitString("0"));
+    }
+
+
+
     private static void closestRoom() {
         System.out.println("!!!测试开始执行!!!");
         printCompare(get1dArr("[3,-1,3]"), self.closestRoom(new int[][]{{2,2},{1,2},{3,2}}, new int[][]{{3,1},{3,3},{5,2}}));

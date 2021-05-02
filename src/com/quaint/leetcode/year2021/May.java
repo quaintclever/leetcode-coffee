@@ -18,6 +18,82 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+
+    /**
+     * 5747. 将字符串拆分为递减的连续值
+     */
+    Map<String, Boolean> cache = new HashMap<>();
+    public boolean splitString(String s) {
+        // 去除前缀 0
+        while (s.charAt(0) == '0' && s.length() > 1) {
+            s = s.substring(1);
+        }
+
+        if(s.length() <= 1) {
+            return false;
+        }
+
+        char[] chars = s.toCharArray();
+        String num = "";
+        for (int i = 0; i < chars.length && i < 18; i++) {
+            num += chars[i];
+            long first = Long.parseLong(num);
+            if (dfs(s.substring(i + 1), first - 1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean dfs(String s, long preNum) {
+        String cacheKey = s + "-" + preNum;
+        if (cache.get(s + "-" + preNum) != null) {
+            return cache.get(cacheKey);
+        }
+        if(s.length() == 0) {
+            return false;
+        }
+        if (preNum == 0) {
+            long zero = Long.parseLong(s);
+            return zero == 0;
+        }
+        // 寻找比 pre 小 1 的数字
+        char[] chars = s.toCharArray();
+        String num = "";
+        for (int i = 0; i < chars.length; i++) {
+            num += chars[i];
+            long first = Long.parseLong(num);
+            if (first > preNum) {
+                return false;
+            }
+            if (first == preNum) {
+                if (s.length() > num.length()) {
+                    boolean dfs = dfs(s.substring(i + 1), first - 1);
+                    cache.put(cacheKey, dfs);
+                    return dfs;
+                } else {
+                    cache.put(cacheKey, true);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 5746. 到目标元素的最小距离
+     */
+    public int getMinDistance(int[] nums, int target, int start) {
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == target) {
+                ans = Math.min(ans, Math.abs(start - i));
+            }
+        }
+        return ans;
+    }
+
+
     /**
      * 5733. 最近的房间
      * 未通过...
@@ -120,7 +196,6 @@ public class May extends LcDataStructure {
      * 将所有数字用字符替换
      */
     public String replaceDigits(String s) {
-        int n = s.length();
         char[] sc = s.toCharArray();
         StringBuilder ans = new StringBuilder();
         for (int i = 0; i < sc.length; i++) {
