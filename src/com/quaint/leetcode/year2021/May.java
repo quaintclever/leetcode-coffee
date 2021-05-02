@@ -20,6 +20,36 @@ public class May extends LcDataStructure {
 
 
     /**
+     * 554. 砖墙
+     * @param wall
+     * @return
+     */
+    public int leastBricks(List<List<Integer>> wall) {
+        Map<Integer,Integer> map = new HashMap<>();
+        // 遍历 缝隙的数量
+        for (List<Integer> bricks : wall) {
+            int gap = 0;
+            for (Integer brick : bricks) {
+                gap += brick;
+                if (map.get(gap) != null) {
+                    map.put(gap, map.get(gap) + 1);
+                } else {
+                    map.put(gap, 1);
+                }
+            }
+            // 移除最后一个缝隙.
+            map.remove(gap);
+        }
+        // 找到最多的缝隙
+        int size = wall.size();
+        int minGap = size;
+        for (Integer key : map.keySet()) {
+            minGap = Math.min(minGap, size - map.get(key));
+        }
+        return minGap;
+    }
+
+    /**
      * 5747. 将字符串拆分为递减的连续值
      */
     Map<String, Boolean> cache = new HashMap<>();
