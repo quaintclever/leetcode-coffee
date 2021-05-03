@@ -3,6 +3,7 @@ package com.quaint.leetcode.year2021;
 import com.quaint.leetcode.abst.AbstractTest;
 
 import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
+import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
 
 /**

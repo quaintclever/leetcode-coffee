@@ -44,21 +44,16 @@ public abstract class LcArrayUtil {
         if ("[[]]".equals(arr) || "".equals(arr)) {
             return new int[][]{};
         }
-        String str = arr.substring(1, arr.length() - 1);
+        String str = arr.substring(1, arr.length() - 2);
         str = str.replace("[", "");
-        String[] strArr = str.split("]");
+        String[] strArr = str.split("],");
         int m = strArr.length;
         int n = strArr[0].split(",").length;
         int[][] res = new int[m][n];
         for (int i = 0; i < m; i++) {
             String[] inArr = strArr[i].split(",");
-            int lower = 0;
             for (int j = 0; j < n; j++) {
-                if ("".equals(inArr[j])) {
-                    lower++;
-                    continue;
-                }
-                res[i][j - lower] = Integer.parseInt(inArr[j]);
+                res[i][j] = Integer.parseInt(inArr[j]);
             }
         }
         return res;
