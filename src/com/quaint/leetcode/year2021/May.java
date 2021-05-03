@@ -54,6 +54,7 @@ public class May extends LcDataStructure {
 
     /**
      * dfs
+     *
      * @param ans 答案数组
      * @param cur 当前是回文串的字符串
      * @param fn  回文串状态
@@ -184,57 +185,44 @@ public class May extends LcDataStructure {
 
     /**
      * 5733. 最近的房间
-     * 未通过...
      */
-    public int[] closestRoom(int[][] rooms, int[][] queries) {
-        // 排序
-        Arrays.sort(rooms, (o1, o2) -> {
-            if (o1[1] == o2[1]) {
-                return o1[0] > o2[0] ? 1 : -1;
-            }
-            return o1[1] > o2[1] ? 1 : -1;
-        });
+    public int[] closestRoom(int[][] rooms, int[][] qs) {
 
-        // 求最大面积
-        int maxSize = 0;
-        for (int i = 0; i < rooms.length; i++) {
-            maxSize = Math.max(rooms[i][1], maxSize);
+        int n = rooms.length, m = qs.length;
+        int[] res = new int[m];
+
+        // 建立问题索引
+        Integer[] pos = new Integer[m];
+        for (int i = 0; i < m; i++) {
+            pos[i] = i;
         }
 
-        int[] ans = new int[queries.length];
-        for (int i = 0; i < queries.length; i++) {
-            int needSize = queries[i][1];
-            if (needSize > maxSize) {
-                ans[i] = -1;
-                continue;
+        // 索引根据 需求面积 降序排序
+        Arrays.sort(pos, (o1, o2) -> qs[o2][1] - qs[o1][1]);
+        // 房屋 2级排序, 面积 > id  升序排序
+        Arrays.sort(rooms, (o1, o2) -> o2[1] == o1[1] ? o1[0] - o2[0] : o2[1] - o1[1]);
+        int k = 0;
+        TreeSet<Integer> set = new TreeSet<>();
+        for (int x : pos) {
+            int id = qs[x][0], area = qs[x][1];
+            while (k < n && rooms[k][1] >= area) {
+                set.add(rooms[k++][0]);
             }
-            // 2分 查找 合适的面积
-            int left = 0;
-            int right = rooms.length - 1;
-            int mid = right;
-            while (left < right) {
-                mid = left + right + 1 >> 1;
-                if (rooms[mid][1] > needSize) {
-                    right = mid - 1;
+            if (set.size() == 0) {
+                res[x] = -1;
+            } else {
+                // 返回 小于或等于 id 的值
+                Integer floor = set.floor(id);
+                // 返回 大于或等于 id 的值
+                Integer ceil = set.ceiling(id);
+                if (floor != null && ceil != null) {
+                    res[x] = Math.abs(floor - id) <= Math.abs(ceil - id) ? floor : ceil;
                 } else {
-                    left = mid;
+                    res[x] = floor == null ? ceil : floor;
                 }
             }
-            // 2分 查找 合适的房间id;
-            int needId = queries[i][0];
-            left = Math.min(left, mid);
-            right = rooms.length - 1;
-            while (left < right) {
-                mid = left + right + 1 >> 1;
-                if (rooms[mid][0] > needId) {
-                    right = mid - 1;
-                } else {
-                    left = mid;
-                }
-            }
-            ans[i] = rooms[left][0] < rooms[right][0] ? rooms[left][0] : rooms[right][0];
         }
-        return ans;
+        return res;
     }
 
 
