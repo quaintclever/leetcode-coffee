@@ -18,14 +18,71 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+    /**
+     * 131. 分割回文串
+     *
+     * @param s
+     * @return
+     */
+    public List<List<String>> partition(String s) {
+        // 判断回文串.
+        int n = s.length();
+        // fn[i][j] 表示 从i - j 是否是回文串
+        boolean[][] fn = new boolean[n][n];
+        char[] chars = s.toCharArray();
+        for (int j = 0; j < chars.length; j++) {
+            for (int i = j; i >= 0; i--) {
+                // 如果是 1 位 则是
+                if (j == i) {
+                    fn[i][j] = true;
+                } else {
+                    // 如果是 2 位
+                    if (j - i == 1) {
+                        fn[i][j] = chars[i] == chars[j];
+                    } else {
+                        // 大于 2 位
+                        fn[i][j] = fn[i + 1][j - 1] && chars[i] == chars[j];
+                    }
+                }
+            }
+        }
+        List<List<String>> ans = new ArrayList<>();
+        List<String> cur = new ArrayList<>();
+        dfs(ans, cur, fn, s, 0);
+        return ans;
+    }
+
+    /**
+     * dfs
+     * @param ans 答案数组
+     * @param cur 当前是回文串的字符串
+     * @param fn  回文串状态
+     * @param str str
+     * @param u   以 s 中的那一位作为回文串分割起点
+     */
+    public void dfs(List<List<String>> ans, List<String> cur, boolean[][] fn, String str, int u) {
+        int n = str.length();
+        if (u == n) {
+            // 防止其他地方移除
+            ans.add(new ArrayList<>(cur));
+        }
+        for (int i = u; i < n; i++) {
+            if (fn[u][i]) {
+                cur.add(str.substring(u, i + 1));
+                dfs(ans, cur, fn, str, i + 1);
+                cur.remove(cur.size() - 1);
+            }
+        }
+    }
 
     /**
      * 554. 砖墙
+     *
      * @param wall
      * @return
      */
     public int leastBricks(List<List<Integer>> wall) {
-        Map<Integer,Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         // 遍历 缝隙的数量
         for (List<Integer> bricks : wall) {
             int gap = 0;
@@ -53,13 +110,14 @@ public class May extends LcDataStructure {
      * 5747. 将字符串拆分为递减的连续值
      */
     Map<String, Boolean> cache = new HashMap<>();
+
     public boolean splitString(String s) {
         // 去除前缀 0
         while (s.charAt(0) == '0' && s.length() > 1) {
             s = s.substring(1);
         }
 
-        if(s.length() <= 1) {
+        if (s.length() <= 1) {
             return false;
         }
 
@@ -80,7 +138,7 @@ public class May extends LcDataStructure {
         if (cache.get(s + "-" + preNum) != null) {
             return cache.get(cacheKey);
         }
-        if(s.length() == 0) {
+        if (s.length() == 0) {
             return false;
         }
         if (preNum == 0) {
