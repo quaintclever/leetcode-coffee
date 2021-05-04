@@ -2,6 +2,10 @@ package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.abst.AbstractTest;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
 import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
@@ -20,20 +24,28 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::splitString);
+        ps.add(MayTest::minimumTotal);
     }
 
     /**
      * ===============================================================
      */
+    private static void minimumTotal() {
+        System.out.println("!!!测试开始执行!!!");
+        List<List<Integer>> list = new ArrayList<>();
+        list.add(Arrays.asList(2));
+        list.add(Arrays.asList(3,4));
+        list.add(Arrays.asList(6,5,7));
+        list.add(Arrays.asList(4,1,8,3));
+        printCompare(11, self.minimumTotal(list));
+    }
+
     private static void splitString() {
         System.out.println("!!!测试开始执行!!!");
         printCompare(false, self.splitString("00000010000000000000"));
         printCompare(false, self.splitString("1"));
         printCompare(false, self.splitString("0"));
     }
-
-
 
     private static void closestRoom() {
         System.out.println("!!!测试开始执行!!!");

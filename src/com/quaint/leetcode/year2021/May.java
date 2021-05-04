@@ -18,6 +18,103 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+
+    /**
+     * 120. 三角形最小路径和
+     *
+     * @param triangle
+     * @return
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int n = triangle.size();
+        int[][] f = new int[2][n];
+        f[0][0] = triangle.get(0).get(0);
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (j == 0) {
+                    f[i & 1][j] = f[(i - 1) & 1][j] + triangle.get(i).get(j);
+                } else {
+                    f[i & 1][j] = Math.min(f[(i - 1) & 1][j], f[(i - 1) & 1][j - 1]) + triangle.get(i).get(j);
+                }
+            }
+            f[i & 1][i] = f[(i - 1) & 1][i - 1] + triangle.get(i).get(i);
+        }
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            ans = Math.min(f[(n - 1) & 1][i], ans);
+        }
+        return ans;
+    }
+
+    /**
+     * 1473. 粉刷房子 III
+     *
+     * @param houses 房子数组
+     * @param cost   每个房子 染指定颜色花费
+     * @param m      m个 房子
+     * @param n      n种 颜色
+     * @param k      目标街区数量
+     * @return 最小花费
+     */
+    public int minCost(int[] houses, int[][] cost, int m, int n, int k) {
+        int inf = 0x3f3f3f3f;
+        // 定义 f[m][n][k] 为考虑前 m 间房子，且第 m 间房子的颜色编号为 n，分区数量为 k 的所有方案中的「最小上色成本」。
+        int[][][] fn = new int[m + 1][n + 1][k + 1];
+        for (int i = 0; i < fn.length; i++) {
+            for (int j = 0; j < fn[0].length; j++) {
+                fn[i][j][0] = inf;
+            }
+        }
+
+        for (int i = 1; i <= m; i++) {
+            int color = houses[i - 1];
+            for (int j = 1; j <= n; j++) {
+                for (int l = 1; l <= k; l++) {
+                    // 如果分区大于 房子数量
+                    if (l > i) {
+                        fn[i][j][l] = inf;
+                        continue;
+                    }
+                    // 房子已上色
+                    if (color != 0) {
+                        if (j != color) {
+                            fn[i][j][l] = inf;
+                        } else {
+                            int temp = inf;
+                            for (int o = 1; o <= n; o++) {
+                                if (o != j) {
+                                    temp = Math.min(fn[i - 1][o][l - 1], temp);
+                                }
+                            }
+                            fn[i][j][l] = Math.min(fn[i - 1][j][l], temp);
+                        }
+                    }
+                    // 房子未上色
+                    else {
+                        int u = cost[i - 1][j - 1];
+                        int temp = inf;
+                        // 形成新分区找最优
+                        for (int o = 1; o <= n; o++) {
+                            if (o != j) {
+                                temp = Math.min(fn[i - 1][o][l - 1], temp);
+                            }
+                        }
+                        // 再结合「第 i 间房不形成新分区」方案中选最优（即与上一房间颜色相同）
+                        // 并将「上色成本」添加进去
+                        fn[i][j][l] = Math.min(fn[i - 1][j][l], temp) + u;
+                    }
+                }
+            }
+        }
+
+        // 找到最小的花费
+        int ans = inf;
+        for (int i = 1; i <= n; i++) {
+            ans = Math.min(ans, fn[m][i][k]);
+        }
+        return ans == inf ? -1 : ans;
+    }
+
     /**
      * 131. 分割回文串
      *
