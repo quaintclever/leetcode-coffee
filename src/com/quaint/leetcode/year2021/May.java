@@ -18,6 +18,26 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+    /**
+     * 14. 最长公共前缀
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix(String[] strs) {
+        if(strs.length == 0) return "";
+        String first = strs[0];
+        StringBuilder ans = new StringBuilder();
+        end:
+        for(int i = 0; i < first.length(); i++) {
+            for(int j = 1; j < strs.length; j++) {
+                if(i >= strs[j].length() || first.charAt(i) != strs[j].charAt(i)) {
+                    break end;
+                }
+            }
+            ans.append(first.charAt(i));
+        }
+        return ans.toString();
+    }
 
     /**
      * 740. 删除并获得点数
