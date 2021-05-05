@@ -20,6 +20,24 @@ public class May extends LcDataStructure {
 
 
     /**
+     * 740. 删除并获得点数
+     * @param nums
+     * @return
+     */
+    public int deleteAndEarn(int[] nums) {
+        int[] help = new int[10000];
+        int limit = 0;
+        for (int i : nums) {
+            help[i] += i;
+            limit = Math.max(limit,i);
+        }
+        for (int i = 2; i <= limit; i++) {
+            help[i] = Math.max(help[i - 2] + help[i], help[i - 1]);
+        }
+        return help[limit];
+    }
+
+    /**
      * 120. 三角形最小路径和
      *
      * @param triangle

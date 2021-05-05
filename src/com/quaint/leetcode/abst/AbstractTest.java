@@ -18,6 +18,7 @@ public abstract class AbstractTest {
     public void execute() {
         ps.forEach(p -> {
             System.out.println("=====================");
+            System.out.println("!!!测试开始执行!!!");
             p.process();
             System.out.println("=====================");
         });

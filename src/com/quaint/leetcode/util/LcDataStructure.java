@@ -37,6 +37,6 @@ public abstract class LcDataStructure {
         public int id;
         public int importance;
         public List<Integer> subordinates;
-    };
+    }
 
 }
