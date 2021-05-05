@@ -30,7 +30,7 @@ public class MayTest extends AbstractTest {
      * ===============================================================
      */
     private static void deleteAndEarn() {
-        int[] arr = get1dArr("[2,2,3,3,3,4]");
+        int[] arr = get1dArr("[1,1,1,1,2,3,4]");
         printCompare(9, self.deleteAndEarn(arr));
     }
 

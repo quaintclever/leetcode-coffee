@@ -25,7 +25,7 @@ public class May extends LcDataStructure {
      * @return
      */
     public int deleteAndEarn(int[] nums) {
-        int[] help = new int[10000];
+        int[] help = new int[10001];
         int limit = 0;
         for (int i : nums) {
             help[i] += i;
