@@ -1,6 +1,7 @@
 # quaint ignore
 .idea
 out
+# 忽略 业务 相关测试
 test/com/quaint/ignore
 
 

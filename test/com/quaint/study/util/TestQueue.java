@@ -8,7 +8,7 @@ import java.util.Queue;
  * @author quaint
  * @date 2021/4/19
  */
-public class QueueTest {
+public class TestQueue {
 
     public static void main(String[] args) {
         // 测试优先队列

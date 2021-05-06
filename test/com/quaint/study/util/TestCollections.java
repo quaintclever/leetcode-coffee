@@ -9,7 +9,7 @@ import java.util.List;
  * @author quaint
  * @date 2021/5/6
  */
-public class CollectionsTest {
+public class TestCollections {
 
     public static void main(String[] args) {
 

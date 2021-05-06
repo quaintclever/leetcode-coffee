@@ -6,7 +6,7 @@ import java.util.TreeMap;
  * @author quaint
  * @date 2021/4/26
  */
-public class TreeMapTest {
+public class TestTreeMap {
 
     public static void main(String[] args) {
 

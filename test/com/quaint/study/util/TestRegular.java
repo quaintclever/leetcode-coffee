@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  * @author quaint
  * @date 2021/2/26
  */
-public class RegularTest {
+public class TestRegular {
 
     public static void main(String[] args) {
         // 匹配正则
