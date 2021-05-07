@@ -18,6 +18,66 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+
+    /**
+     * 66. 加一
+     * @param digits
+     * @return
+     */
+    public int[] plusOne(int[] digits) {
+        int n = digits.length;
+        int[] f = new int[n];
+        int[] f2 = new int[n + 1];
+        int one = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            if (digits[i] + one > 9) {
+                if (i != 0) {
+                    f[i] = (digits[i] + 1) % 10;
+                    f2[i + 1] = f[i];
+                } else {
+                    f2[i + 1] = f[i];
+                    f2[i] = 1;
+                    return f2;
+                }
+            } else {
+                f[i] = digits[i] + one;
+                f2[i + 1] = f[i];
+                one = 0;
+            }
+        }
+        return f;
+    }
+
+    /**
+     * 38. 外观数列
+     * @param n
+     * @return
+     */
+    public String countAndSay(int n) {
+        String ans = "1";
+        while(n > 1) {
+            String temp = "";
+            int num = 0;
+            char cur = ans.charAt(0);
+            for(int i = 0; i < ans.length(); i ++) {
+                if(ans.charAt(i) == cur) {
+                    num ++;
+                } else {
+                    temp = temp + num + cur;
+                    num = 1;
+                    cur = ans.charAt(i);
+                }
+            }
+            if(num > 0) {
+                temp = temp + num + cur;
+            }
+            ans = temp;
+            n--;
+        }
+        return ans;
+    }
+
+
     /**
      * 14. 最长公共前缀
      * @param strs

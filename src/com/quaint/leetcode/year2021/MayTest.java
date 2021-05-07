@@ -23,12 +23,20 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::deleteAndEarn);
+        ps.add(MayTest::plusOne);
     }
 
     /**
      * ===============================================================
      */
+    private static void plusOne() {
+        printCompare(get1dArr("[1,0,0,0]"), self.plusOne(get1dArr("[9,9,9]")));
+    }
+
+    private static void countAndSay() {
+        printCompare("1211", self.countAndSay(4));
+    }
+
     private static void deleteAndEarn() {
         int[] arr = get1dArr("[1,1,1,1,2,3,4]");
         printCompare(9, self.deleteAndEarn(arr));
