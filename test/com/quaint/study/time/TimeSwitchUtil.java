@@ -2,6 +2,8 @@ package com.quaint.study.time;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 
 /**
  * 时间转换工具
@@ -145,4 +147,46 @@ public abstract class TimeSwitchUtil {
     public static long getTodayZeroTime() {
         return LocalDate.now().atStartOfDay().toEpochSecond(ZoneOffset.of("+8"));
     }
+
+    /**
+     * 获取当前秒数
+     * @return 时间戳 单位: 秒
+     */
+    public static Long getCurrentTimeSeconds() {
+        return System.currentTimeMillis() / 1000L;
+    }
+
+    /**
+     * 获取相对时间 的0点 秒数
+     * @param day
+     * @return
+     */
+    public static long getRelativeDayZeroTime(int day) {
+        return getRelativeDayZeroTime(day, ChronoUnit.DAYS);
+    }
+
+    public static long getRelativeDayZeroTime(int num, TemporalUnit unit) {
+        if (num == 0) {
+            return getTodayZeroTime();
+        }
+        return LocalDate.now().plus(num, unit).atStartOfDay().toEpochSecond(ZoneOffset.of("+8"));
+    }
+
+
+    /**
+     * 获取相对时间 的当前时间秒数
+     * @param day
+     * @return
+     */
+    public static long getRelativeDayTime(int day) {
+        return getRelativeDayTime(day, ChronoUnit.DAYS);
+    }
+
+    public static long getRelativeDayTime(int num, TemporalUnit unit) {
+        if (num == 0) {
+            return LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
+        }
+        return LocalDateTime.now().plus(num, unit).toEpochSecond(ZoneOffset.of("+8"));
+    }
+
 }
