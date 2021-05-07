@@ -7,6 +7,7 @@ import java.time.temporal.TemporalUnit;
 
 /**
  * 时间转换工具
+ *
  * @author quaint
  * @date 2021/4/20
  */
@@ -120,6 +121,7 @@ public abstract class TimeSwitchUtil {
 
     /**
      * 不包含日期的时间字符串, 转为当天的对应时间
+     *
      * @param timeStr
      * @return
      */
@@ -142,6 +144,7 @@ public abstract class TimeSwitchUtil {
 
     /**
      * 获取今天 0 时的 时间戳
+     *
      * @return 时间戳
      */
     public static long getTodayZeroTime() {
@@ -150,14 +153,16 @@ public abstract class TimeSwitchUtil {
 
     /**
      * 获取当前秒数
+     *
      * @return 时间戳 单位: 秒
      */
     public static Long getCurrentTimeSeconds() {
-        return System.currentTimeMillis() / 1000L;
+        return LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
     }
 
     /**
      * 获取相对时间 的0点 秒数
+     *
      * @param day
      * @return
      */
@@ -175,6 +180,7 @@ public abstract class TimeSwitchUtil {
 
     /**
      * 获取相对时间 的当前时间秒数
+     *
      * @param day
      * @return
      */
@@ -187,6 +193,16 @@ public abstract class TimeSwitchUtil {
             return LocalDateTime.now().toEpochSecond(ZoneOffset.of("+8"));
         }
         return LocalDateTime.now().plus(num, unit).toEpochSecond(ZoneOffset.of("+8"));
+    }
+
+    /**
+     * 获取现在到今天最晚时间的秒数
+     *
+     * @return
+     */
+    public static long getNowToTodayEndTime() {
+        long sec = getRelativeDayZeroTime(1) - getCurrentTimeSeconds() - 1;
+        return Math.max(1, sec);
     }
 
 }
