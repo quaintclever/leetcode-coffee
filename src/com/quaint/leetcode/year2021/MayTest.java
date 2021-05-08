@@ -23,12 +23,19 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::minimumTimeRequired);
+        ps.add(MayTest::minDays);
     }
 
     /**
      * ===============================================================
      */
+    private static void minDays() {
+        printCompare(3, self.minDays(get1dArr("[1,10,3,10,2]"), 3,1));
+        printCompare(9, self.minDays(get1dArr("[1,10,2,9,3,8,4,7,5,6]"), 4,2));
+        printCompare(12, self.minDays(get1dArr("[7,7,7,7,12,7,7]"), 2,3));
+    }
+
+
     private static void minimumTimeRequired() {
         printCompare(78, self.minimumTimeRequired(get1dArr("[46,13,54,51,38,49,54,67,26,78,33]"), 10));
         printCompare(501, self.minimumTimeRequired(get1dArr("[250,250,256,251,254,254,251,255,250,252,254,255]"), 10));

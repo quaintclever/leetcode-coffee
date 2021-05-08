@@ -20,6 +20,43 @@ public class May extends LcDataStructure {
 
 
     /**
+     * [1,10,3,10,2]
+     * 3
+     * 1
+     * @param bloomDay
+     * @param m
+     * @param k
+     * @return
+     */
+    public int minDays(int[] bloomDay, int m, int k) {
+        int ans = -1, n = bloomDay.length;
+        if (m * k > n) return ans;
+        if (m * k == n) return Arrays.stream(bloomDay).max().orElse(ans);
+
+        // 降序
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        for (int i = 0; i < bloomDay.length; i++) {
+            map.put(bloomDay[i], i);
+        }
+
+        TreeSet<Integer> set = new TreeSet<>();
+        int flows = n / k;
+        while (flows >= m && !map.isEmpty()) {
+            // 最大的key
+            ans = map.lastKey();
+            int idx = map.get(ans);
+            map.remove(ans);
+            set.add(idx);
+            Integer up = set.ceiling(idx + 1);
+            up = up == null ? n : up;
+            Integer down = set.floor(idx - 1);
+            down = down == null ? -1 : down;
+            flows -= (up - down - 1) / k - (idx - down - 1) / k - (up - idx - 1) / k;
+        }
+        return ans;
+    }
+
+    /**
      * 1723. 完成所有工作的最短时间
      * 输入：jobs = [1,2,4,7,8], k = 2
      * 输出：11
