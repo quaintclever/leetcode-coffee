@@ -20,7 +20,69 @@ public class May extends LcDataStructure {
 
 
     /**
+     * 1723. 完成所有工作的最短时间
+     * 输入：jobs = [1,2,4,7,8], k = 2
+     * 输出：11
+     * 解释：按下述方式分配工作：
+     * 1 号工人：1、2、8（工作时间 = 1 + 2 + 8 = 11）
+     * 2 号工人：4、7（工作时间 = 4 + 7 = 11）
+     * 最大工作时间是 11 。
+     */
+    int[] jobs;
+    int n, k;
+    // 较大值.
+    int ans = 0x3f3f3f3f;
+    int count;
+    int count2;
+    public int minimumTimeRequired(int[] jobs, int k) {
+        // 初始化代码
+        ans = 0x3f3f3f3f;
+
+        this.jobs = jobs;
+        this.n = jobs.length;
+        this.k = k;
+        int[] worker = new int[k];
+
+        count = 0;
+        count2 = 0;
+        dfs(0, worker, 0, 0);
+        System.out.println(count);
+        System.out.println(count2);
+        return ans;
+    }
+
+    /**
+     * 工作分配
+     * @param idx 当前工作
+     * @param worker 工作分配情况
+     * @param max 工人的最大用时
+     */
+    public void dfs(int idx, int[] worker, int max, int used) {
+//        count ++;
+        // 结束条件
+        if (max >= ans) return;
+        if (idx == n) {
+            ans = max;
+            return;
+        }
+
+        // 优化分配策略
+        if (used < k) {
+//            count2++;
+            worker[used] += jobs[idx];
+            dfs(idx + 1, worker, Math.max(worker[used], max), used + 1);
+            worker[used] -= jobs[idx];
+        }
+        for (int i = 0; i < used; i++) {
+            worker[i] += jobs[idx];
+            dfs(idx + 1, worker, Math.max(worker[i], max), used);
+            worker[i] -= jobs[idx];
+        }
+    }
+
+    /**
      * 66. 加一
+     *
      * @param digits
      * @return
      */
@@ -50,25 +112,26 @@ public class May extends LcDataStructure {
 
     /**
      * 38. 外观数列
+     *
      * @param n
      * @return
      */
     public String countAndSay(int n) {
         String ans = "1";
-        while(n > 1) {
+        while (n > 1) {
             String temp = "";
             int num = 0;
             char cur = ans.charAt(0);
-            for(int i = 0; i < ans.length(); i ++) {
-                if(ans.charAt(i) == cur) {
-                    num ++;
+            for (int i = 0; i < ans.length(); i++) {
+                if (ans.charAt(i) == cur) {
+                    num++;
                 } else {
                     temp = temp + num + cur;
                     num = 1;
                     cur = ans.charAt(i);
                 }
             }
-            if(num > 0) {
+            if (num > 0) {
                 temp = temp + num + cur;
             }
             ans = temp;
@@ -80,17 +143,18 @@ public class May extends LcDataStructure {
 
     /**
      * 14. 最长公共前缀
+     *
      * @param strs
      * @return
      */
     public String longestCommonPrefix(String[] strs) {
-        if(strs.length == 0) return "";
+        if (strs.length == 0) return "";
         String first = strs[0];
         StringBuilder ans = new StringBuilder();
         end:
-        for(int i = 0; i < first.length(); i++) {
-            for(int j = 1; j < strs.length; j++) {
-                if(i >= strs[j].length() || first.charAt(i) != strs[j].charAt(i)) {
+        for (int i = 0; i < first.length(); i++) {
+            for (int j = 1; j < strs.length; j++) {
+                if (i >= strs[j].length() || first.charAt(i) != strs[j].charAt(i)) {
                     break end;
                 }
             }
@@ -101,6 +165,7 @@ public class May extends LcDataStructure {
 
     /**
      * 740. 删除并获得点数
+     *
      * @param nums
      * @return
      */
@@ -109,7 +174,7 @@ public class May extends LcDataStructure {
         int limit = 0;
         for (int i : nums) {
             help[i] += i;
-            limit = Math.max(limit,i);
+            limit = Math.max(limit, i);
         }
         for (int i = 2; i <= limit; i++) {
             help[i] = Math.max(help[i - 2] + help[i], help[i - 1]);
