@@ -24,6 +24,7 @@ public class May extends LcDataStructure {
     class Index {
         public Integer key;
         public Integer val;
+
         public Index(Integer key, Integer val) {
             this.key = key;
             this.val = val;
@@ -36,13 +37,7 @@ public class May extends LcDataStructure {
         if (m * k == n) return Arrays.stream(bloomDay).max().orElse(ans);
 
         // 降序
-        Queue<Index> pq = new PriorityQueue<>((a,b)->{
-            if (!a.key.equals(b.key)) {
-                return b.key - a.key;
-            } else {
-                return a.val - b.val;
-            }
-        });
+        Queue<Index> pq = new PriorityQueue<>((a, b) -> b.key - a.key);
         for (int i = 0; i < bloomDay.length; i++) {
             pq.offer(new Index(bloomDay[i], i));
         }
@@ -77,6 +72,7 @@ public class May extends LcDataStructure {
     int n, k;
     // 较大值.
     int ans = 0x3f3f3f3f;
+
     public int minimumTimeRequired(int[] jobs, int k) {
         // 初始化代码
         ans = 0x3f3f3f3f;
@@ -92,9 +88,10 @@ public class May extends LcDataStructure {
 
     /**
      * 工作分配
-     * @param idx 当前工作
+     *
+     * @param idx    当前工作
      * @param worker 工作分配情况
-     * @param max 工人的最大用时
+     * @param max    工人的最大用时
      */
     public void dfs(int idx, int[] worker, int max, int used) {
         // 结束条件
