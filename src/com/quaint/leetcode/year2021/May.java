@@ -18,34 +18,42 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
-
     /**
-     * [1,10,3,10,2]
-     * 3
-     * 1
-     * @param bloomDay
-     * @param m
-     * @param k
-     * @return
+     * 1482. 制作 m 束花所需的最少天数
      */
+    class Index {
+        public Integer key;
+        public Integer val;
+        public Index(Integer key, Integer val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
+
     public int minDays(int[] bloomDay, int m, int k) {
         int ans = -1, n = bloomDay.length;
         if (m * k > n) return ans;
         if (m * k == n) return Arrays.stream(bloomDay).max().orElse(ans);
 
         // 降序
-        TreeMap<Integer, Integer> map = new TreeMap<>();
+        Queue<Index> pq = new PriorityQueue<>((a,b)->{
+            if (!a.key.equals(b.key)) {
+                return b.key - a.key;
+            } else {
+                return a.val - b.val;
+            }
+        });
         for (int i = 0; i < bloomDay.length; i++) {
-            map.put(bloomDay[i], i);
+            pq.offer(new Index(bloomDay[i], i));
         }
 
         TreeSet<Integer> set = new TreeSet<>();
         int flows = n / k;
-        while (flows >= m && !map.isEmpty()) {
+        while (flows >= m && !pq.isEmpty()) {
             // 最大的key
-            ans = map.lastKey();
-            int idx = map.get(ans);
-            map.remove(ans);
+            Index poll = pq.poll();
+            ans = poll.key;
+            int idx = poll.val;
             set.add(idx);
             Integer up = set.ceiling(idx + 1);
             up = up == null ? n : up;
@@ -69,8 +77,6 @@ public class May extends LcDataStructure {
     int n, k;
     // 较大值.
     int ans = 0x3f3f3f3f;
-    int count;
-    int count2;
     public int minimumTimeRequired(int[] jobs, int k) {
         // 初始化代码
         ans = 0x3f3f3f3f;
@@ -80,11 +86,7 @@ public class May extends LcDataStructure {
         this.k = k;
         int[] worker = new int[k];
 
-        count = 0;
-        count2 = 0;
         dfs(0, worker, 0, 0);
-        System.out.println(count);
-        System.out.println(count2);
         return ans;
     }
 
@@ -95,7 +97,6 @@ public class May extends LcDataStructure {
      * @param max 工人的最大用时
      */
     public void dfs(int idx, int[] worker, int max, int used) {
-//        count ++;
         // 结束条件
         if (max >= ans) return;
         if (idx == n) {
@@ -105,7 +106,6 @@ public class May extends LcDataStructure {
 
         // 优化分配策略
         if (used < k) {
-//            count2++;
             worker[used] += jobs[idx];
             dfs(idx + 1, worker, Math.max(worker[used], max), used + 1);
             worker[used] -= jobs[idx];

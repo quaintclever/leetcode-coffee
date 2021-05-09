@@ -2,11 +2,10 @@ package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.abst.AbstractTest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import static com.quaint.leetcode.util.LcArrayUtil.*;
+import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
+import static com.quaint.leetcode.util.LcArrayUtil.get2dList;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
 
 /**
@@ -34,7 +33,6 @@ public class MayTest extends AbstractTest {
         printCompare(9, self.minDays(get1dArr("[1,10,2,9,3,8,4,7,5,6]"), 4,2));
         printCompare(12, self.minDays(get1dArr("[7,7,7,7,12,7,7]"), 2,3));
     }
-
 
     private static void minimumTimeRequired() {
         printCompare(78, self.minimumTimeRequired(get1dArr("[46,13,54,51,38,49,54,67,26,78,33]"), 10));
