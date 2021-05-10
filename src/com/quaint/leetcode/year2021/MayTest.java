@@ -4,8 +4,7 @@ import com.quaint.leetcode.abst.AbstractTest;
 
 import java.util.List;
 
-import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
-import static com.quaint.leetcode.util.LcArrayUtil.get2dList;
+import static com.quaint.leetcode.util.LcDataProcessUtil.*;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
 
 /**
@@ -22,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::minDays);
+        ps.add(MayTest::testTree);
     }
 
     /**
      * ===============================================================
      */
+    private static void testTree() {
+        getTree("[3,5,1,6,2,9,8,null,null,7,4]");
+    }
+
     private static void minDays() {
         printCompare(3, self.minDays(get1dArr("[1,10,3,10,2]"), 3,1));
         printCompare(9, self.minDays(get1dArr("[1,10,2,9,3,8,4,7,5,6]"), 4,2));

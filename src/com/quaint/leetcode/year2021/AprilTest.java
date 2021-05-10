@@ -4,8 +4,8 @@ import com.quaint.leetcode.abst.AbstractTest;
 
 import java.util.Arrays;
 
-import static com.quaint.leetcode.util.LcArrayUtil.get1dArr;
-import static com.quaint.leetcode.util.LcArrayUtil.get2dArr;
+import static com.quaint.leetcode.util.LcDataProcessUtil.get1dArr;
+import static com.quaint.leetcode.util.LcDataProcessUtil.get2dArr;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
 
 /**

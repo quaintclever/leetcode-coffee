@@ -1,17 +1,16 @@
 package com.quaint.leetcode.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
- * desc: leetcode 数组工具类
+ * desc: leetcode 数据处理 工具类
  * </p>
  *
  * @author quaint
  * @since 18 April 2021
  */
-public abstract class LcArrayUtil {
+public abstract class LcDataProcessUtil extends LcDataStructure{
 
     /**
      * 获取 一维 字符串
@@ -75,7 +74,7 @@ public abstract class LcArrayUtil {
      * 获取 二维 List
      *
      * @param arr 字符串数组  eg:  "[[1,2,3,4,5]]"
-     * @return List<List<Integer>>
+     * @return List<List < Integer>>
      */
     public static List<List<Integer>> get2dList(String arr) {
         if ("[[]]".equals(arr) || "".equals(arr)) {
@@ -98,6 +97,60 @@ public abstract class LcArrayUtil {
             res.add(cur);
         }
         return res;
+    }
+
+    /**
+     * 获取 TreeNode
+     * eg:
+     * [3,5,1,6,2,9,8,null,null,7,4]
+     *
+     *          3
+     *        /   \
+     *      5      1
+     *     / \    / \
+     *    6  2   9   8
+     *      / \
+     *     7  4
+     * @param str 字符串数组
+     * @return tree
+     */
+    @SuppressWarnings("all")
+    public static TreeNode getTree(String str) {
+        // 返回空树
+        if ("[]".equals(str) || str.length() < 3) {
+            return null;
+        }
+        // 处理数据
+        String treeStr = str.substring(1, str.length() - 1);
+        String[] treeStrArr = treeStr.split(",");
+        // 创建树
+        TreeNode root = new TreeNode();
+        root.val = Integer.parseInt(treeStrArr[0]);
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        TreeNode node = null;
+        for (int i = 1; i < treeStrArr.length; i++) {
+            if ((i & 1) == 1) {
+                node = que.poll();
+            }
+            if ("null".equals(treeStrArr[i])) {
+                if ((i & 1) == 1) {
+                    node.left = null;
+                } else {
+                    node.right = null;
+                }
+            } else {
+                TreeNode subNode = new TreeNode();
+                subNode.val = Integer.parseInt(treeStrArr[i]);
+                if ((i & 1) == 1) {
+                    node.left = subNode;
+                } else {
+                    node.right = subNode;
+                }
+                que.offer(subNode);
+            }
+        }
+        return root;
     }
 
 }

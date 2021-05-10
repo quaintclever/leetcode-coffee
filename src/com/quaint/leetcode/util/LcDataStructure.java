@@ -11,7 +11,7 @@ public abstract class LcDataStructure {
     /**
      * Definition for a binary tree node.
      */
-    public class TreeNode {
+    public static class TreeNode {
         public int val;
         public TreeNode left;
         public TreeNode right;
