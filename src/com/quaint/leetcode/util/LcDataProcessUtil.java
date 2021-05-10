@@ -137,13 +137,7 @@ public abstract class LcDataProcessUtil extends LcDataStructure{
             if ((i & 1) == 1) {
                 node = que.poll();
             }
-            if ("null".equals(treeStrArr[i])) {
-                if ((i & 1) == 1) {
-                    node.left = null;
-                } else {
-                    node.right = null;
-                }
-            } else {
+            if (!"null".equals(treeStrArr[i])) {
                 TreeNode subNode = new TreeNode();
                 subNode.val = Integer.parseInt(treeStrArr[i]);
                 if ((i & 1) == 1) {
