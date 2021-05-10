@@ -123,6 +123,10 @@ public abstract class LcDataProcessUtil extends LcDataStructure{
         // 处理数据
         String treeStr = str.substring(1, str.length() - 1);
         String[] treeStrArr = treeStr.split(",");
+        if ("null".equals(treeStrArr[0])) {
+            return null;
+        }
+
         // 创建树
         TreeNode root = new TreeNode();
         root.val = Integer.parseInt(treeStrArr[0]);
