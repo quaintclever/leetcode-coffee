@@ -19,6 +19,35 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 1734. 解码异或后的排列
+     * @param encoded
+     * @return
+     */
+    public int[] decode(int[] encoded) {
+        // 计算总异或 和
+        int n = encoded.length + 1;
+        int all = 1;
+        for(int i = 2; i <= n; i++) {
+            all ^= i;
+        }
+        // 计算第一个 perm, 偶数异或即可, 因为为奇数 v 选择, x 不选择
+        // [1,2]x   [2,3]v   [3,4]x  [4,5]v
+        int first = all;
+        for(int i = 1; i < n - 1; i++) {
+            if((i&1) == 1) {
+                first ^= encoded[i];
+            }
+        }
+        // 计算结果
+        int[] ans = new int[n];
+        ans[0] = first;
+        for(int i = 1; i < n; i++) {
+            ans[i] = ans[i - 1] ^ encoded[i - 1];
+        }
+        return ans;
+    }
+
+    /**
      * 1482. 制作 m 束花所需的最少天数
      */
     class Index {
