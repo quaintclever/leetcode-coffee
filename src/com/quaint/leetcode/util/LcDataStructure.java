@@ -9,6 +9,11 @@ import java.util.List;
 public abstract class LcDataStructure {
 
     /**
+     * mod
+     */
+    public static int MOD = (int) 1e9 + 7;
+
+    /**
      * Definition for a binary tree node.
      */
     public static class TreeNode {

@@ -18,6 +18,39 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+
+    /**
+     * 1269. 停在原地的方案数
+     * @param steps
+     * @param arrLen
+     * @return
+     */
+    Map<String, Long> numWaysCache = new HashMap<>();
+    public int numWays(int steps, int arrLen) {
+        return (int) dfs(steps, arrLen, 0);
+    }
+
+    public long dfs(int steps, int arrLen, int idx) {
+        if (idx < 0 || idx >= arrLen) return 0;
+        if (steps == 0) return idx == 0 ? 1 : 0;
+
+        // 设置缓存
+        String key = steps + "-" + idx;
+        if (numWaysCache.containsKey(key)) {
+            return numWaysCache.get(key);
+        }
+
+        // 递归遍历
+        long res = dfs(steps - 1, arrLen, idx + 1)
+                + dfs(steps - 1, arrLen, idx)
+                + dfs(steps - 1, arrLen, idx - 1);
+        res %= MOD;
+        numWaysCache.put(key, res);
+        return res;
+    }
+
+
+
     /**
      * 1734. 解码异或后的排列
      *

@@ -21,14 +21,14 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::testTree);
+        ps.add(MayTest::numWays);
     }
 
     /**
      * ===============================================================
      */
-    private static void testTree() {
-        getTree("[3,5,1,6,2,9,8,null,null,7,4]");
+    private static void numWays() {
+        printCompare(4, self.numWays(3,2));
     }
 
     private static void minDays() {
