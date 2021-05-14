@@ -20,12 +20,44 @@ public class May extends LcDataStructure {
 
 
     /**
+     * 12. 整数转罗马数字
+     * 字符          数值
+     * I             1
+     * V             5
+     * X             10
+     * L             50
+     * C             100
+     * D             500
+     * M             1000
+     *
+     * @param num
+     * @return
+     */
+    public String intToRoman(int num) {
+        String[] bit1 = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+        String[] bit2 = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+        String[] bit3 = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+        String[] bit4 = {"", "M", "MM", "MMM", "", "", "", "", "", ""};
+        String[][] bitAll = {bit1, bit2, bit3, bit4};
+        int count = 0;
+        StringBuilder ans = new StringBuilder();
+        while (num != 0 && count < 4) {
+            ans.insert(0, bitAll[count][num % 10]);
+            num /= 10;
+            count ++;
+        }
+        return ans.toString();
+    }
+
+    /**
      * 1269. 停在原地的方案数
+     *
      * @param steps
      * @param arrLen
      * @return
      */
     Map<String, Long> numWaysCache = new HashMap<>();
+
     public int numWays(int steps, int arrLen) {
         return (int) dfs(steps, arrLen, 0);
     }
@@ -48,7 +80,6 @@ public class May extends LcDataStructure {
         numWaysCache.put(key, res);
         return res;
     }
-
 
 
     /**

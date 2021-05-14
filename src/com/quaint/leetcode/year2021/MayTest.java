@@ -21,12 +21,17 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::numWays);
+        ps.add(MayTest::intToRoman);
     }
 
     /**
      * ===============================================================
      */
+    private static void intToRoman() {
+        printCompare("MCMXCIV", self.intToRoman(1994));
+        printCompare("LVIII", self.intToRoman(58));
+    }
+
     private static void numWays() {
         printCompare(4, self.numWays(3,2));
     }
