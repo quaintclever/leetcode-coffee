@@ -21,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::intToRoman);
+        ps.add(MayTest::isCousins);
     }
 
     /**
      * ===============================================================
      */
+    private static void isCousins() {
+        printCompare(false, self.isCousins(getTree("[1,2,3,4]"),4,3));
+    }
+
     private static void intToRoman() {
         printCompare("MCMXCIV", self.intToRoman(1994));
         printCompare("LVIII", self.intToRoman(58));

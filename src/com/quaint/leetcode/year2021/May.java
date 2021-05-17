@@ -18,6 +18,28 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+    /**
+     * 993. 二叉树的堂兄弟节点
+     *
+     * @param root
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean isCousins(TreeNode root, int x, int y) {
+        Map<Integer, Integer> levelMap = new HashMap<>();
+        Map<Integer, Integer> parentMap = new HashMap<>();
+        dfs(levelMap, parentMap, root, 0, -1);
+        return levelMap.get(x).equals(levelMap.get(y)) && !parentMap.get(x).equals(parentMap.get(y));
+    }
+
+    public void dfs(Map<Integer, Integer> levelMap, Map<Integer, Integer> parentMap, TreeNode node, int level, int parent) {
+        if (node == null) return;
+        dfs(levelMap, parentMap, node.left, level + 1, node.val);
+        levelMap.put(node.val, level);
+        parentMap.put(node.val, parent);
+        dfs(levelMap, parentMap, node.right, level + 1, node.val);
+    }
 
     /**
      * 12. 整数转罗马数字
@@ -44,7 +66,7 @@ public class May extends LcDataStructure {
         while (num != 0 && count < 4) {
             ans.insert(0, bitAll[count][num % 10]);
             num /= 10;
-            count ++;
+            count++;
         }
         return ans.toString();
     }
