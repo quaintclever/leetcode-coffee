@@ -21,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::isCousins);
+        ps.add(MayTest::countTriplets);
     }
 
     /**
      * ===============================================================
      */
+    private static void countTriplets() {
+        printCompare(4, self.countTriplets(get1dArr("[2,3,1,6,7]")));
+    }
+
     private static void isCousins() {
         printCompare(false, self.isCousins(getTree("[1,2,3,4]"),4,3));
     }

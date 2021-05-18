@@ -18,6 +18,35 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+
+    /**
+     * 1442. 形成两个异或相等数组的三元组数目
+     *
+     * @param arr
+     * @return
+     */
+    public int countTriplets(int[] arr) {
+        int n = arr.length;
+        // 构建前缀数组
+        int[] preArr = new int[n + 1];
+        for (int i = 1; i < n + 1; i++) {
+            preArr[i] = preArr[i - 1] ^ arr[i - 1];
+        }
+
+        int ans = 0;
+        // 遍历前缀数组
+        for (int i = 1; i <= n; i++) {
+            for (int j = i + 1; j <= n; j++) {
+                for (int k = j; k <= n; k++) {
+                    if ((preArr[i - 1] ^ preArr[k]) == 0) {
+                        ans++;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+
     /**
      * 993. 二叉树的堂兄弟节点
      *
