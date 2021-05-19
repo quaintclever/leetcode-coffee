@@ -21,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::countTriplets);
+        ps.add(MayTest::kthLargestValue);
     }
 
     /**
      * ===============================================================
      */
+    private static void kthLargestValue() {
+        printCompare(7, self.kthLargestValue(get2dArr("[[5,2],[1,6]]"), 1));
+    }
+
     private static void countTriplets() {
         printCompare(4, self.countTriplets(get1dArr("[2,3,1,6,7]")));
     }
