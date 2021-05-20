@@ -1,5 +1,6 @@
 package com.quaint.study.time;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -9,16 +10,25 @@ import java.time.LocalDateTime;
 public class TestTimeSwitch extends TimeSwitchUtil {
 
     public static void main(String[] args) {
-        LocalDateTime localDateTime = timeStr2toDayTime("07:11:11");
-        System.out.println(localDateTime.toString());
+        LocalDateTime now = LocalDateTime.now();
+        LocalDate date = LocalDate.now();
 
-        System.out.println("获取今天 0 时的秒 时间戳");
-        System.out.println(getTodayZeroTime());
+        System.out.println("=======");
+        System.out.println(now);
+        System.out.println(switch2milli(now));
 
-        System.out.println("获取15天前 0 时的秒 时间戳");
-        System.out.println(getRelativeDayZeroTime(-15));
-        System.out.println(long2string(getRelativeDayZeroTime(-15) * 1000));
-        System.out.println(long2string(getRelativeDayTime(-15) * 1000));
+        System.out.println("=======");
+        System.out.println(date);
+        System.out.println(switch2second(date));
+
+        System.out.println("=======");
+        System.out.println(now);
+        System.out.println(switch2second(now));
+
+        System.out.println("=======");
+        System.out.println(switch2second(now));
+        System.out.println(second2DateStr(switch2second(now)));
+
     }
 
 }
