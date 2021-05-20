@@ -13,7 +13,7 @@ import java.util.*;
 public abstract class LcDataProcessUtil extends LcDataStructure{
 
     /**
-     * 获取 一维 字符串
+     * 获取 一维 int 数组
      *
      * @param arr 字符串数组  eg:  [1,2,3,4,5]  or 1,2,3,4,5
      * @return int[]
@@ -37,7 +37,29 @@ public abstract class LcDataProcessUtil extends LcDataStructure{
     }
 
     /**
-     * 获取 二维 字符串
+     * 获取 一维 字符串 数组
+     *
+     * @param arr 字符串数组  eg:  "[\"i\", \"love\", \"leetcode\", \"i\", \"love\", \"coding\"]"
+     * @return String[]
+     */
+    public static String[] get1dArrStr(String arr) {
+        if ("[]".equals(arr) || "".equals(arr)) {
+            return new String[]{};
+        }
+        // 去掉引号
+        arr = arr.replace("\"", "");
+        arr = arr.replace(" ", "");
+        String str;
+        if (arr.startsWith("[") && arr.endsWith("]")) {
+            str = arr.substring(1, arr.length() - 1);
+        } else {
+            str = arr;
+        }
+        return str.split(",");
+    }
+
+    /**
+     * 获取 二维 int 数组
      *
      * @param arr 字符串数组  eg:  "[[1,2,3,4,5]]"
      * @return int[][]

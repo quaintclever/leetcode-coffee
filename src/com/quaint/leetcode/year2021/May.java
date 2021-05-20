@@ -19,6 +19,48 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
 
+    class Word {
+        public String word;
+        public int count;
+
+        public Word(String word, int count) {
+            this.word = word;
+            this.count = count;
+        }
+    }
+
+    /**
+     * 692. 前K个高频单词
+     *
+     * @param words
+     * @param k
+     * @return
+     */
+    public List<String> topKFrequent(String[] words, int k) {
+        Queue<Word> pq = new PriorityQueue<>((w1, w2) -> {
+            if (w1.count == w2.count) {
+                return w1.word.compareTo(w2.word);
+            }
+            return w2.count - w1.count;
+        });
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String word : words) {
+            if (map.containsKey(word)) {
+                map.put(word, map.get(word) + 1);
+            } else {
+                map.put(word, 1);
+            }
+        }
+        map.forEach((k1, v) -> pq.offer(new Word(k1,v)));
+
+        List<String> ans = new ArrayList<>();
+        for (int i = 0; i < k; i++) {
+            ans.add(pq.poll().word);
+        }
+        return ans;
+    }
+
     /**
      * 1738. 找出第 K 大的异或坐标值
      *

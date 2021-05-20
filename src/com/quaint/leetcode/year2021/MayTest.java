@@ -21,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::kthLargestValue);
+        ps.add(MayTest::topKFrequent);
     }
 
     /**
      * ===============================================================
      */
+    private static void topKFrequent() {
+        printCompare(get1dArrStr("[\"i\", \"love\"]"), self.topKFrequent(get1dArrStr("[\"i\", \"love\", \"leetcode\", \"i\", \"love\", \"coding\"]"), 2));
+    }
+
     private static void kthLargestValue() {
         printCompare(7, self.kthLargestValue(get2dArr("[[5,2],[1,6]]"), 1));
     }
