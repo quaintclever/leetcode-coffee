@@ -18,6 +18,27 @@ import java.util.stream.Collectors;
  */
 public class May extends LcDataStructure {
 
+    /**
+     * 1035. 不相交的线
+     *
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int maxUncrossedLines(int[] nums1, int[] nums2) {
+        int n1 = nums1.length, n2 = nums2.length;
+        int[][] f = new int[2][n2 + 1];
+        for (int i = 1; i <= n1; i++) {
+            for (int j = 1; j <= n2; j++) {
+                if (nums1[i - 1] == nums2[j - 1]) {
+                    f[i & 1][j] = f[(i - 1) & 1][j - 1] + 1;
+                } else {
+                    f[i & 1][j] = Math.max(f[(i - 1) & 1][j], f[i & 1][j - 1]);
+                }
+            }
+        }
+        return f[n1 & 1][n2];
+    }
 
     class Word {
         public String word;
@@ -52,7 +73,7 @@ public class May extends LcDataStructure {
                 map.put(word, 1);
             }
         }
-        map.forEach((k1, v) -> pq.offer(new Word(k1,v)));
+        map.forEach((k1, v) -> pq.offer(new Word(k1, v)));
 
         List<String> ans = new ArrayList<>();
         for (int i = 0; i < k; i++) {

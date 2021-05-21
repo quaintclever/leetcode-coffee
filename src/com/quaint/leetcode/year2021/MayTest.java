@@ -21,12 +21,17 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::topKFrequent);
+        ps.add(MayTest::maxUncrossedLines);
     }
 
     /**
      * ===============================================================
      */
+    private static void maxUncrossedLines() {
+        printCompare(2, self.maxUncrossedLines(get1dArr("[1,4,2]"), get1dArr("[1,2,4]")));
+        printCompare(3, self.maxUncrossedLines(get1dArr("[2,5,1,2,5]"), get1dArr("[10,5,2,1,5,2]")));
+    }
+
     private static void topKFrequent() {
         printCompare(get1dArrStr("[\"i\", \"love\"]"), self.topKFrequent(get1dArrStr("[\"i\", \"love\", \"leetcode\", \"i\", \"love\", \"coding\"]"), 2));
     }
