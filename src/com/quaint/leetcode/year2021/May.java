@@ -19,6 +19,38 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 810. 黑板异或游戏
+     */
+    public boolean xorGame(int[] nums) {
+        int n = nums.length;
+        // 总异或 数
+        int allXor = 0;
+        for (int num : nums) {
+            allXor ^= num;
+        }
+        // 判断是否直接胜利
+        if (allXor == 0) return true;
+
+        // 擦除记录
+        boolean[] clearFlag = new boolean[n];
+        int count = 0;
+        next:
+        while(count < n) {
+            count ++;
+            for (int i = 0; i < n; i++) {
+                if (!clearFlag[i] && (allXor ^ nums[i]) != 0) {
+                    // 擦除
+                    clearFlag[i] = true;
+                    allXor ^= nums[i];
+                    continue next;
+                }
+            }
+            return count % 2 == 0;
+        }
+        return n % 2 == 0;
+    }
+
+    /**
      * 1035. 不相交的线
      *
      * @param nums1
