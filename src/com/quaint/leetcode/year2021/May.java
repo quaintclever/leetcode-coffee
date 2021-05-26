@@ -19,6 +19,47 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 1190. 反转每对括号间的子串
+     */
+    public String reverseParentheses(String s) {
+        StringBuilder ans = new StringBuilder();
+        Deque<Character>[] stks = new Deque[2];
+        stks[0] = new LinkedList<>();
+        stks[1] = new LinkedList<>();
+
+        // 后续数据存放到栈中
+        int deep = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            if (cur == '(') {
+                deep ++;
+                stks[deep & 1].push(cur);
+            } else if (cur == ')') {
+                if (deep > 1) {
+                    while (stks[deep & 1].peek() != '(') {
+                        stks[(deep - 1) & 1].push(stks[deep & 1].pop());
+                    }
+                    // 弹出括号
+                    stks[deep & 1].pop();
+                } else {
+                    while(stks[1].peek() != '(') {
+                        ans.append(stks[1].pop());
+                    }
+                    stks[1].pop();
+                }
+                deep--;
+            } else {
+                if (deep == 0) {
+                    ans.append(cur);
+                } else {
+                    stks[deep & 1].push(cur);
+                }
+            }
+        }
+        return ans.toString();
+    }
+
+    /**
      * 1035. 不相交的线
      *
      * @param nums1
