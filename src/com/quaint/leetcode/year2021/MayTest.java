@@ -27,6 +27,11 @@ public class MayTest extends AbstractTest {
     /**
      * ===============================================================
      */
+    private static void xorGame() {
+        printCompare(false, self.xorGame(get1dArr("[1,2,3]")));
+        printCompare(false, self.xorGame(get1dArr("[1,1,2]")));
+    }
+
     private static void reverseParentheses() {
         printCompare("iloveu", self.reverseParentheses("(u(love)i)"));
         printCompare("aqcvbhcwer", self.reverseParentheses("a(ch(qc(bv)))wer"));
