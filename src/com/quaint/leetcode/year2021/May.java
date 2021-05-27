@@ -19,6 +19,15 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 461. 汉明距离
+     */
+    public int hammingDistance(int x, int y) {
+        int ans = 0;
+        for (int i = x ^ y; i > 0; i -= i & -i) ans++;
+        return ans;
+    }
+
+    /**
      * 810. 黑板异或游戏
      */
     public boolean xorGame(int[] nums) {
@@ -35,8 +44,8 @@ public class May extends LcDataStructure {
         boolean[] clearFlag = new boolean[n];
         int count = 0;
         next:
-        while(count < n) {
-            count ++;
+        while (count < n) {
+            count++;
             for (int i = 0; i < n; i++) {
                 if (!clearFlag[i] && (allXor ^ nums[i]) != 0) {
                     // 擦除
@@ -64,7 +73,7 @@ public class May extends LcDataStructure {
         for (int i = 0; i < s.length(); i++) {
             char cur = s.charAt(i);
             if (cur == '(') {
-                deep ++;
+                deep++;
                 stks[deep & 1].push(cur);
             } else if (cur == ')') {
                 if (deep > 1) {
@@ -74,7 +83,7 @@ public class May extends LcDataStructure {
                     // 弹出括号
                     stks[deep & 1].pop();
                 } else {
-                    while(stks[1].peek() != '(') {
+                    while (stks[1].peek() != '(') {
                         ans.append(stks[1].pop());
                     }
                     stks[1].pop();
