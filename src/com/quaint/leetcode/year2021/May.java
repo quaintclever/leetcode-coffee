@@ -19,6 +19,26 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 477. 汉明距离总和
+     */
+    public int totalHammingDistance(int[] nums) {
+        int ans = 0;
+        for (int i = 0; i < 32; i++) {
+            int s1 = 0, s2 = 0;
+            for (int i1 = 0; i1 < nums.length; i1++) {
+                if ((nums[i1] & 1) == 1) {
+                    s1 ++;
+                } else {
+                    s2 ++;
+                }
+                nums[i1] >>= 1;
+            }
+            ans += s1 * s2;
+        }
+        return ans;
+    }
+
+    /**
      * 461. 汉明距离
      */
     public int hammingDistance(int x, int y) {

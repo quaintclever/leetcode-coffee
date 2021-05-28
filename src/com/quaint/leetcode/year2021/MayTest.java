@@ -21,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::reverseParentheses);
+        ps.add(MayTest::totalHammingDistance);
     }
 
     /**
      * ===============================================================
      */
+    private static void totalHammingDistance() {
+        printCompare(6, self.totalHammingDistance(get1dArr("[4,14,2]")));
+    }
+
     private static void xorGame() {
         printCompare(false, self.xorGame(get1dArr("[1,2,3]")));
         printCompare(false, self.xorGame(get1dArr("[1,1,2]")));
