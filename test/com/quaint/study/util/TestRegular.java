@@ -1,5 +1,6 @@
 package com.quaint.study.util;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
@@ -7,6 +8,10 @@ import java.util.regex.Pattern;
  * @date 2021/2/26
  */
 public class TestRegular {
+
+    private final static String regexH5 = "^http(s)?://.*";
+    private final static String regexWx = "^/.*";
+    private final static String regexAli = "^/.*";
 
     public static void main(String[] args) {
         // 匹配正则
@@ -19,6 +24,14 @@ public class TestRegular {
         System.out.println("df454d".matches("\\w+"));
         System.out.println("dfd的是非得失".matches("\\w+"));
         System.out.println("11.0".matches("\\d+.\\d+"));
+
+        System.out.println(isAliAppletUrl("/ali/page"));
+    }
+
+    public static boolean isAliAppletUrl(String aliUrl) {
+        Pattern pattern = Pattern.compile(regexAli, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(aliUrl);
+        return matcher.find();
     }
 
 }
