@@ -21,12 +21,16 @@ public class MayTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(MayTest::totalHammingDistance);
+        ps.add(MayTest::numSubmatrixSumTarget);
     }
 
     /**
      * ===============================================================
      */
+    private static void numSubmatrixSumTarget() {
+        printCompare(4, self.numSubmatrixSumTarget(get2dArr("[[0,1,0],[1,1,1],[0,1,0]]"), 0));
+    }
+
     private static void totalHammingDistance() {
         printCompare(6, self.totalHammingDistance(get1dArr("[4,14,2]")));
     }
@@ -59,7 +63,7 @@ public class MayTest extends AbstractTest {
     }
 
     private static void isCousins() {
-        printCompare(false, self.isCousins(getTree("[1,2,3,4]"),4,3));
+        printCompare(false, self.isCousins(getTree("[1,2,3,4]"), 4, 3));
     }
 
     private static void intToRoman() {
@@ -68,13 +72,13 @@ public class MayTest extends AbstractTest {
     }
 
     private static void numWays() {
-        printCompare(4, self.numWays(3,2));
+        printCompare(4, self.numWays(3, 2));
     }
 
     private static void minDays() {
-        printCompare(3, self.minDays(get1dArr("[1,10,3,10,2]"), 3,1));
-        printCompare(9, self.minDays(get1dArr("[1,10,2,9,3,8,4,7,5,6]"), 4,2));
-        printCompare(12, self.minDays(get1dArr("[7,7,7,7,12,7,7]"), 2,3));
+        printCompare(3, self.minDays(get1dArr("[1,10,3,10,2]"), 3, 1));
+        printCompare(9, self.minDays(get1dArr("[1,10,2,9,3,8,4,7,5,6]"), 4, 2));
+        printCompare(12, self.minDays(get1dArr("[7,7,7,7,12,7,7]"), 2, 3));
     }
 
     private static void minimumTimeRequired() {
@@ -109,7 +113,7 @@ public class MayTest extends AbstractTest {
     }
 
     private static void closestRoom() {
-        printCompare(get1dArr("[3,-1,3]"), self.closestRoom(new int[][]{{2,2},{1,2},{3,2}}, new int[][]{{3,1},{3,3},{5,2}}));
+        printCompare(get1dArr("[3,-1,3]"), self.closestRoom(new int[][]{{2, 2}, {1, 2}, {3, 2}}, new int[][]{{3, 1}, {3, 3}, {5, 2}}));
     }
 
     private static void nextGreaterElements() {

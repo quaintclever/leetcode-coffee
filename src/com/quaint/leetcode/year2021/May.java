@@ -19,6 +19,39 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 1074. 元素和为目标值的子矩阵数量
+     * @param matrix
+     * @param target
+     * @return
+     */
+    public int numSubmatrixSumTarget(int[][] matrix, int target) {
+        int m = matrix.length, n = matrix[0].length;
+        // 构建前缀数组
+        int[][] fn = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                fn[i][j] = matrix[i - 1][j - 1] + fn[i - 1][j] + fn[i][j - 1] - fn[i - 1][j - 1];
+            }
+        }
+
+        // 遍历所有情况
+        int ans = 0;
+        for (int x1 = 1; x1 <= m; x1++) {
+            for (int y1 = 1; y1 <= n; y1++) {
+                for (int x2 = x1; x2 <= m; x2++) {
+                    for (int y2 = y1; y2 <= n; y2++) {
+                        int temp = fn[x2][y2] + fn[x1 - 1][y1 - 1] - fn[x1 - 1][y2] - fn[x2][y1 - 1];
+                        if (temp == target) {
+                            ans++;
+                        }
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+
+    /**
      * 477. 汉明距离总和
      */
     public int totalHammingDistance(int[] nums) {
@@ -27,9 +60,9 @@ public class May extends LcDataStructure {
             int s1 = 0, s2 = 0;
             for (int i1 = 0; i1 < nums.length; i1++) {
                 if ((nums[i1] & 1) == 1) {
-                    s1 ++;
+                    s1++;
                 } else {
-                    s2 ++;
+                    s2++;
                 }
                 nums[i1] >>= 1;
             }
