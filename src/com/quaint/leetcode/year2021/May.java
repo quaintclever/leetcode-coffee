@@ -19,6 +19,19 @@ import java.util.stream.Collectors;
 public class May extends LcDataStructure {
 
     /**
+     * 342. 4的幂
+     * @param n
+     * @return
+     */
+    public boolean isPowerOfFour(int n) {
+        if(n <= 0 || (n & (n - 1)) != 0) return false;
+        while (n > 2) {
+            n >>= 2;
+        }
+        return n == 1;
+    }
+
+    /**
      * 1074. 元素和为目标值的子矩阵数量
      * @param matrix
      * @param target
