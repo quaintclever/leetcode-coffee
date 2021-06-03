@@ -18,12 +18,16 @@ public class JuneTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(JuneTest::checkSubarraySum);
+        ps.add(JuneTest::findMaxLength);
     }
 
     /**
      * ===============================================================
      */
+    private static void findMaxLength() {
+        printCompare(2, self.findMaxLength(get1dArr("[0,1]")));
+    }
+
     private static void checkSubarraySum() {
         printCompare(true, self.checkSubarraySum(get1dArr("[23,2,4,6,7]"), 13));
         printCompare(true, self.checkSubarraySum(get1dArr("[23,2,4,6,7]"), 6));

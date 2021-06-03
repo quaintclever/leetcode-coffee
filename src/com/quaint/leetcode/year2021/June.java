@@ -14,6 +14,34 @@ import java.util.Map;
 public class June extends LcDataStructure {
 
     /**
+     * 525. 连续数组
+     *
+     * @param nums
+     * @return
+     */
+    public int findMaxLength(int[] nums) {
+        // 构建前缀数组
+        int n = nums.length;
+        int[] sum = new int[n + 1];
+        for (int i = 1; i <= n; i++) {
+            sum[i] = sum[i - 1] - 1 + (nums[i - 1] << 1);
+        }
+        // 记录坐标和前缀和
+        Map<Integer, Integer> sumIdxMap = new HashMap<>();
+        int ans = 0;
+        sumIdxMap.put(0, 0);
+        for (int i = 2; i <= n; i++) {
+            if (!sumIdxMap.containsKey(sum[i - 2])) {
+                sumIdxMap.put(sum[i - 2], i - 2);
+            }
+            if (sumIdxMap.containsKey(sum[i])) {
+                ans = Math.max(ans, i - sumIdxMap.get(sum[i]));
+            }
+        }
+        return ans;
+    }
+
+    /**
      * 523. 连续的子数组和 (改map)
      *
      * @param nums
