@@ -13,6 +13,26 @@ import java.util.Map;
  */
 public class June extends LcDataStructure {
 
+
+    /**
+     * 494. 目标和
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int findTargetSumWays(int[] nums, int target) {
+        return dfs(nums, 0, target);
+    }
+
+    private int dfs(int[] nums, int idx, int target) {
+        if (idx >= nums.length) {
+            return target == 0 ? 1 : 0;
+        }
+        int left = dfs(nums, idx + 1, target + nums[idx]);
+        int right = dfs(nums, idx + 1, target - nums[idx]);
+        return left + right;
+    }
+
     /**
      * 525. 连续数组
      *

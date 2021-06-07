@@ -18,12 +18,16 @@ public class JuneTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(JuneTest::findMaxLength);
+        ps.add(JuneTest::findTargetSumWays);
     }
 
     /**
      * ===============================================================
      */
+    private static void findTargetSumWays() {
+        printCompare(5, self.findTargetSumWays(get1dArr("[1,1,1,1,1]"), 3));
+    }
+
     private static void findMaxLength() {
         printCompare(2, self.findMaxLength(get1dArr("[0,1]")));
     }
