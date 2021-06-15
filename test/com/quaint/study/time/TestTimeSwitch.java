@@ -29,6 +29,9 @@ public class TestTimeSwitch extends TimeSwitchUtil {
         System.out.println(switch2second(now));
         System.out.println(second2DateStr(switch2second(now)));
 
+        System.out.println("=======");
+        System.out.println(TimeSwitchUtil.longM2string(System.currentTimeMillis(), "yyyyMM"));
+
     }
 
 }
