@@ -2,6 +2,8 @@ package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.abst.AbstractTest;
 
+import java.util.Random;
+
 import static com.quaint.leetcode.util.LcDataProcessUtil.get1dArr;
 import static com.quaint.leetcode.util.LcDataProcessUtil.get2dArr;
 import static com.quaint.leetcode.util.LcPrintUtil.printCompare;
@@ -18,12 +20,23 @@ public class JuneTest extends AbstractTest {
 
     static {
         // 测试代码添加位置..
-        ps.add(JuneTest::findTargetSumWays);
+        ps.add(JuneTest::rainStream);
     }
 
     /**
      * ===============================================================
      */
+    private static void rainStream() {
+        Random random = new Random(1);
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < 20; i++) {
+            int r = (random.nextInt(100) + 1);
+            sb.append(i % 2 == 0 ? r * -1 : r).append(",");
+        }
+        String arrStr = sb.substring(0, sb.length() - 2) + "]";
+        printCompare("[-48:14, 5:-35, 49:-70, -18:64, -63:35, -93:63]", self.rainStream(get1dArr(arrStr)));
+    }
+
     private static void findTargetSumWays() {
         printCompare(5, self.findTargetSumWays(get1dArr("[1,1,1,1,1]"), 3));
     }

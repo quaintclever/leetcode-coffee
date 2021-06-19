@@ -1,8 +1,11 @@
 package com.quaint.leetcode.year2021;
 
 import com.quaint.leetcode.util.LcDataStructure;
+import com.quaint.leetcode.util.LcPrintUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,6 +16,49 @@ import java.util.Map;
  */
 public class June extends LcDataStructure {
 
+    /**
+     * 雨流算法. (一遍不行.)
+     * @param rainStream 雨流数组
+     * @return 删除的雨流
+     */
+    public List<String> rainStream(int[] rainStream) {
+        System.out.println("======= 随机生成的数组 =======");
+        System.out.println(LcPrintUtil.arr1D2str(rainStream));
+
+        int idx = 0;
+        List<String> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        for (int i = 1; i < rainStream.length - 2;) {
+            if (this.isRainStream(rainStream[idx], rainStream[i++], rainStream[i++], rainStream[i])) {
+                res.add(rainStream[i - 2] + ":" + rainStream[i - 1]);
+            } else {
+                temp.add(rainStream[idx]);
+                if (i - idx != 3) {
+                    idx = i - 2;
+                } else {
+                    idx++;
+                }
+                i = idx + 1;
+            }
+            // 剩余的
+            if (i >= rainStream.length - 2){
+                temp.add(rainStream[idx]);
+                for (int j = i; j < rainStream.length; j++) {
+                    temp.add(rainStream[j]);
+                }
+            }
+        }
+        System.out.println("======= 剩余的 =======");
+        System.out.println(LcPrintUtil.arr1D2str(temp));
+        return res;
+    }
+
+    private boolean isRainStream(int a, int b, int c, int d) {
+        if (b >= d && c <= a && c > b) {
+            return true;
+        }
+        return b <= d && c >= a && c < b;
+    }
 
     /**
      * 494. 目标和
